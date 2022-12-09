@@ -1,6 +1,6 @@
 {
   "name": "@andr-ll/nuti",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "andr_ll",
   "license": "ISC",
   "description": "A collection of commonly used utils for Node.js.",
@@ -16,7 +16,6 @@
   ],
   "keywords": [],
   "scripts": {
-    "start": "ts-node ./src",
     "build": "tsc",
     "types": "tsc --noEmit",
     "format": "prettier --write '**/*.{js,json,md,ts,yml,yaml}'",
@@ -24,7 +23,7 @@
     "lint": "eslint --fix '**/*.ts'",
     "lint:check": "eslint '**/*.ts'",
     "spell": "cspell '**/*'",
-    "init:husky": "git config core.hooksPath '.husky'",
+    "husky:init": "git config core.hooksPath '.husky'",
     "version:check": "ts-node ./scripts/version_check.ts"
   },
   "devDependencies": {
@@ -41,8 +40,5 @@
     "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
-  },
-  "dependencies": {
-    "npm-run-all": "^4.1.5"
   }
 }
