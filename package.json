@@ -1,9 +1,9 @@
 {
   "name": "@andr-ll/nuti",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "andr_ll",
   "license": "ISC",
-  "description": "Useful Node.js utils",
+  "description": "A collection of commonly used utils for Node.js.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "engines": {
