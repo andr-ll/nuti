@@ -35,9 +35,7 @@ Output:
 >
 > Labels will have colorful output in console:
 >
-> $\textsf{\color[RGB]{0,128,0} [\ info\ ]:}$ 
-> $\textsf{\color[RGB]{225,225,0} [\ warn\ ]:}$ 
-> $\textsf{\color[RGB]{225,0,0} [\ error\ ]:}$
+> $\textsf{\color[RGB]{0,128,0} [\ info\ ]:}$ > $\textsf{\color[RGB]{225,225,0} [\ warn\ ]:}$ > $\textsf{\color[RGB]{225,0,0} [\ error\ ]:}$
 
 ```log
 13:38:05 Dec 9 2022 [ info ]: some log
