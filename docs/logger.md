@@ -31,16 +31,22 @@ logger.info('An object', {
 
 Output:
 
-<p style="background-color: #151515; padding: 10px; font-family: monospace;">
-  13:38:05 Dec 9 2022 <span style="color:green;">[ info ]:</span> some log </br>
-  13:38:05 Dec 9 2022 <span style="color:yellow;">[ warn ]:</span> some warning </br>
-  13:38:05 Dec 9 2022 <span style="color:red;">[ error ]:</span> some error </br>
-  13:38:05 Dec 9 2022 <span style="color:green;">[ info ]:</span> An object </br>
-  { </br>
-  &nbsp  "value": 2, </br>
-  &nbsp  "color": "green" </br>
-  } </br>
-</p>
+> **Note**
+>
+> Labels will have colorful output in console:
+>
+> $\textsf{\color[RGB]{0,128,0} [\ info\ ]:}$ > $\textsf{\color[RGB]{225,225,0} [\ warn\ ]:}$ > $\textsf{\color[RGB]{225,0,0} [\ error\ ]:}$
+
+```log
+13:38:05 Dec 9 2022 [ info ]: some log
+13:38:05 Dec 9 2022 [ warn ]: some warning
+13:38:05 Dec 9 2022 [ error ]: some error
+13:38:05 Dec 9 2022 [ info ]: An object
+{
+  "value": 2,
+  "color": "green"
+}
+```
 
 ### Write logs to a file:
 
