@@ -1,6 +1,6 @@
 {
   "name": "@andr-ll/nuti",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "andr_ll",
   "license": "ISC",
   "description": "A collection of commonly used utils for Node.js.",
