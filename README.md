@@ -34,4 +34,4 @@ const { nuti } = require('@andr-ll/nuti');
 1. [logger](./docs/logger.md)
 2. [timeout](./docs/timeout.md)
 3. [flag](./docs/flag.md)
-4. log
+4. [prettyOut](./docs/prettyOut.md)
