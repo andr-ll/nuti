@@ -1,4 +1,4 @@
-import { log } from './log';
+import { prettyOut } from './prettyOut';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
 import { makeFlag } from './flag';
@@ -27,12 +27,10 @@ export const nuti = {
    */
   timeout,
   /**
-   * A log function which formats output to be printed to console.
-   * Uses `JSON.stringify()` for not primitive types.
-   *
-   * @param args objects, arrays, strings, numbers to be printed in console
+   * A function which overrides `toString` method for Objects and Arrays.
+   * @see [docs](../docs/prettyOut.md)
    */
-  log,
+  prettyOut,
   /**
    * A function for creating a logger with ability to write file logs.
    * @see [docs](../docs/logger.md)
