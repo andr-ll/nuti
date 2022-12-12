@@ -1,6 +1,13 @@
 import { log } from './log';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
+import { makeFlag } from './flag';
+
+import type * as LogTypes from './logger/types';
+
+export type Types = {
+  LoggerOptions: LogTypes.LoggerOptions;
+};
 
 export const nuti = {
   /**
@@ -30,9 +37,14 @@ export const nuti = {
    * A function for creating a logger with ability to write file logs.
    * @see [docs](../docs/logger.md)
    *
-   * @param options {@link Types.LoggerOptions LoggerOptions}
+   * @param options {@link LogTypes.LoggerOptions LoggerOptions}
    */
   makeLogger,
+  /**
+   * A function for creating flag instance.
+   * @see [docs](../docs/flag.md)
+   */
+  makeFlag,
 };
 
 export default nuti;
