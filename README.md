@@ -34,5 +34,5 @@ const { nuti } = require('@andr-ll/nuti');
 <!-- TODO: Add documentation about utils. -->
 
 1. [logger](./docs/logger.md)
-2. timeout
+2. [timeout](./docs/timeout.md)
 3. log
