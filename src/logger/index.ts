@@ -1,69 +1,65 @@
 import * as fs from 'fs';
-import * as Types from './types';
 import { LogType, LogLabel } from './constants';
 import { getTimeFormatted } from './helpers';
+import { Context, LoggerOptions, Writer } from './types';
 
-export const makeLogger = (options: Types.LoggerOptions = {}) => {
-  const writers: Types.Writer[] = [];
-  const { filePath, stdoutEnable = true } = options;
+export class Logger {
+  private writers: Writer[] = [];
 
-  if (stdoutEnable === false && filePath == null) {
-    throw new Error('At least one output has to be specified!');
+  constructor(options: LoggerOptions = {}) {
+    const { filePath, stdoutEnable = true } = options;
+
+    if (stdoutEnable === false && filePath == null) {
+      throw new Error('At least one output has to be specified!');
+    }
+
+    if (stdoutEnable != null && stdoutEnable) {
+      this.createWriter(console.log);
+    }
+
+    if (typeof filePath === 'string') {
+      const stream = fs.createWriteStream(filePath);
+      this.createWriter(stream.write.bind(stream), true);
+    }
   }
 
-  if (stdoutEnable != null && stdoutEnable) {
-    createWriter(console.log);
+  public info(message: string, context?: Context) {
+    this.writeMessages(LogType.Info, message, context);
   }
 
-  if (typeof filePath === 'string') {
-    const stream = fs.createWriteStream(filePath);
-    createWriter(stream.write.bind(stream), true);
+  public error(message: string, context?: Context) {
+    this.writeMessages(LogType.Error, message, context);
   }
 
-  const info = (message: string, context?: Types.Context) => {
-    writeMessages(LogType.Info, message, context);
-  };
+  public warn(message: string, context?: Context) {
+    this.writeMessages(LogType.Warn, message, context);
+  }
 
-  const error = (message: string, context?: Types.Context) => {
-    writeMessages(LogType.Error, message, context);
-  };
-
-  const warn = (message: string, context?: Types.Context) => {
-    writeMessages(LogType.Warn, message, context);
-  };
-
-  function writeMessages(
-    type: LogType,
-    message: string,
-    context?: Types.Context,
-  ) {
+  private writeMessages(type: LogType, message: string, context?: Context) {
     const time = getTimeFormatted();
     const contextFormatted =
-      context == null ? '' : `${JSON.stringify(context, null, 2)}\n`;
+      context == null ? '' : `\n${JSON.stringify(context, null, 2)}`;
 
-    for (const writer of writers) {
+    for (const writer of this.writers) {
       writer({ time, type, message, contextFormatted });
     }
   }
 
-  function createWriter(writerFn: Types.WriterFn, isFileStream = false) {
-    const writer: Types.Writer = (args) => {
+  private createWriter(
+    writerFn: (message: string) => void,
+    isFileStream = false,
+  ) {
+    const writer: Writer = (args) => {
       const { time, type, message, contextFormatted } = args;
 
       const label = isFileStream ? `${type}:` : LogLabel[type];
-      const outMessage = `${time} ${label} ${message}${
-        isFileStream ? '\n' : ''
-      }`;
+      const outMessage = `${time} ${label} ${message}`;
 
-      writerFn(`${outMessage}${contextFormatted}`);
+      writerFn(`${outMessage}${contextFormatted}${isFileStream ? '\n' : ''}`);
     };
 
-    writers.push(writer);
+    this.writers.push(writer);
   }
+}
 
-  return {
-    info,
-    warn,
-    error,
-  };
-};
+export const makeLogger = (options?: LoggerOptions) => new Logger(options);
