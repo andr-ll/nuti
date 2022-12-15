@@ -31,7 +31,8 @@ const { nuti } = require('@andr-ll/nuti');
 
 ## Available utilities
 
-1. [logger](./docs/logger.md)
-2. [timeout](./docs/timeout.md)
-3. [flag](./docs/flag.md)
-4. [prettyOut](./docs/prettyOut.md)
+1. [logger](https://github.com/andr-ll/nuti/blob/master/docs/logger.md)
+2. [timeout](https://github.com/andr-ll/nuti/blob/master/docs/timeout.md)
+3. [flag](https://github.com/andr-ll/nuti/blob/master/docs/flag.md)
+4. [prettyOut](https://github.com/andr-ll/nuti/blob/master/docs/prettyOut.md)
+5. [rand](https://github.com/andr-ll/nuti/blob/master/docs/rand.md)
