@@ -45,7 +45,7 @@ export const nuti = {
    */
   makeFlag,
   /**
-   * An object with methods to generate random `string`, 
+   * An object with methods to generate random `string`,
    * `number` and `boolean` types.
    * @see [docs](../docs/rand.md)
    */
