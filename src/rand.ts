@@ -6,7 +6,7 @@ export class Rand {
   }
 
   numb(min = 0, max = 10) {
-    return Math.round((max - mix) * Math.random()) - min;
+    return Math.round((max - min) * Math.random()) - min;
   }
 
   str(len = 8) {
