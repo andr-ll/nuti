@@ -2,6 +2,7 @@ import { prettyOut } from './prettyOut';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
 import { makeFlag } from './flag';
+import { rand } from './rand';
 
 import type * as LogTypes from './logger/types';
 
@@ -43,6 +44,12 @@ export const nuti = {
    * @see [docs](../docs/flag.md)
    */
   makeFlag,
+  /**
+   * An object with methods to generate random `string`, 
+   * `number` and `boolean` types.
+   * @see [docs](../docs/rand.md)
+   */
+  rand,
 };
 
 export default nuti;
