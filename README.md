@@ -36,3 +36,4 @@ const { nuti } = require('@andr-ll/nuti');
 3. [flag](https://github.com/andr-ll/nuti/blob/master/docs/flag.md)
 4. [prettyOut](https://github.com/andr-ll/nuti/blob/master/docs/prettyOut.md)
 5. [rand](https://github.com/andr-ll/nuti/blob/master/docs/rand.md)
+6. [req](https://github.com/andr-ll/nuti/blob/master/docs/httpClient.md)

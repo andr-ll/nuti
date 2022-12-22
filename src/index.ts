@@ -3,6 +3,7 @@ import { timeout } from './timeout';
 import { makeLogger } from './logger';
 import { makeFlag } from './flag';
 import { rand } from './rand';
+import { req } from './httpClient';
 
 import type * as LogTypes from './logger/types';
 
@@ -50,6 +51,12 @@ export const nuti = {
    * @see [docs](../docs/rand.md)
    */
   rand,
+  /**
+   * An http(s) client with ability to perform 'GET', 'POST',
+   * 'PUT', 'DELETE' requests.
+   * @see [docs](../docs/httpClient.md)
+   */
+  req,
 };
 
 export default nuti;
