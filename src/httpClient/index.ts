@@ -90,7 +90,7 @@ export class HttpClient {
         let rawData = '';
         const status = res.statusCode ?? 500;
         const isJSON =
-          res.headers['content-type']?.includes('application/json');
+          res.headers['content-type']?.includes('application/json') === true;
 
         const contentLengthRaw = Number(res.headers['content-length']);
         const contentLength = Number.isNaN(contentLengthRaw)
