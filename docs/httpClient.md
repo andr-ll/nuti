@@ -131,6 +131,37 @@ Expected output:
 }
 ```
 
+### TS GENERIC TYPES
+
+> **Note**
+>
+> Be mindful with Generic types, if you are not sure that your service is
+> ging to return **exactly these values**. Any value is **posibly undefined**
+> and may cause unexpected errors.
+
+```ts
+interface UserResponse {
+  name: string;
+  id: number;
+}
+
+const { json } = await nuti.req.get<UserResponse>('http://localhost:3000/user');
+
+if (json != null) {
+  const { name, id } = json;
+
+  console.log(`The "name" field has type "${typeof name}" and value ${name}`);
+  console.log(`The "id" field has type "${typeof id}" and value ${id}`);
+}
+```
+
+Expected output:
+
+```log
+The "name" field has type "string" and value some user
+The "id" field has type "number" and value 123
+```
+
 ### NOT JSON CONTENT-TYPE
 
 ```ts
@@ -163,7 +194,7 @@ Expected output:
 
 ### FAILED REQUEST
 
-Lets pretend your server has responds with `json` content-type for `404 Not Fund` cases:
+Lets pretend your server has responds with `json` content-type for `404 Not Found` cases:
 
 ```ts
 const response = await nuti.req.get('http://localhost:3000/foo', {
