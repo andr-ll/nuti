@@ -89,7 +89,8 @@ export class HttpClient {
       const req = validProtocol.request(opts, (res) => {
         let rawData = '';
         const status = res.statusCode ?? 500;
-        const isJSON = res.headers['content-type'] === 'application/json';
+        const isJSON =
+          res.headers['content-type']?.includes('application/json');
 
         const contentLengthRaw = Number(res.headers['content-length']);
         const contentLength = Number.isNaN(contentLengthRaw)
@@ -103,7 +104,7 @@ export class HttpClient {
         res.on('end', () => {
           resolve({
             status,
-            ok: status <= 400,
+            ok: status < 400,
             contentLength,
             headers: res.headers,
             json: isJSON ? JSON.parse(rawData) : undefined,
