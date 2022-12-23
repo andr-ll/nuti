@@ -150,16 +150,16 @@ const { json } = await nuti.req.get<UserResponse>('http://localhost:3000/user');
 if (json != null) {
   const { name, id } = json;
 
-  console.log(`The "name" field has type "${typeof name}" and value ${name}`);
-  console.log(`The "id" field has type "${typeof id}" and value ${id}`);
+  console.log(`The "name" field has type "${typeof name}" and value "${name}"`);
+  console.log(`The "id" field has type "${typeof id}" and value "${id}"`);
 }
 ```
 
 Expected output:
 
 ```log
-The "name" field has type "string" and value some user
-The "id" field has type "number" and value 123
+The "name" field has type "string" and value "some user"
+The "id" field has type "number" and value "123"
 ```
 
 ### NOT JSON CONTENT-TYPE
