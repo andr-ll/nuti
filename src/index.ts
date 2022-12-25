@@ -52,7 +52,7 @@ export const nuti = {
    */
   rand,
   /**
-   * An http(s) client with ability to perform 'GET', 'POST',
+   * The http(s) client with ability to perform 'GET', 'POST',
    * 'PUT', 'DELETE' requests.
    * @see [docs](../docs/httpClient.md)
    */
