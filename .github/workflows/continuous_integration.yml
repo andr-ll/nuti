@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm install
       - run: npm run lint:check
   types:
@@ -29,9 +31,9 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm install
       - run: npm run types
   spell:
     runs-on: ubuntu-latest
