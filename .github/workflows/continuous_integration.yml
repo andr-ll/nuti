@@ -22,22 +22,16 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Install dependencies
         run: npm install
-
       - name: Lint check
         run: npm run lint:check
-
       - name: Types check
         run: npm run types
-
       - name: Format check
         run: npm run format:check
-
       - name: Spell check
         run: npm run spell
-
       - name: Semantic version check
         run: npm run svc
     timeout-minutes: 5
