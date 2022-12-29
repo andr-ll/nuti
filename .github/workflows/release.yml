@@ -15,12 +15,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
+          registry-url: 'https://npm.pkg.github.com/'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies
-        run: npm i
+        run: npm install
       - name: Build
         run: npm run build
       - name: Publish
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
