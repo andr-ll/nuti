@@ -9,74 +9,29 @@ defaults:
     shell: bash
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start lint checking
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm install
-      - run: npm run lint:check
-  types:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start types checking
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm install
-      - run: npm run types
-  spell:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start spell checking
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm install
-      - run: npm run spell
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start spell checking
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm install
-      - run: npm run format:check
-  version-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start spell checking
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm install
-      - run: npm run version:check
   merge:
-    needs:
-      - format
-      - lint
-      - spell
-      - types
-      - version-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Start spell checking
+      - name: Prepare actions
+        uses: actions/checkout@v3
+      - name: Setup node env
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: echo 'merging is available'
+          cache: 'npm'
+          registry-url: 'https://npm.pkg.github.com'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: npm install
+      - name: Lint check
+        run: npm run lint:check
+      - name: Types check
+        run: npm run types
+      - name: Format check
+        run: npm run format:check
+      - name: Spell check
+        run: npm run spell
+      - name: Semantic version check
+        run: npm run svc
     timeout-minutes: 5
