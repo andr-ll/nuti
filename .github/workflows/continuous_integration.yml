@@ -30,6 +30,8 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run types
   spell:
     runs-on: ubuntu-latest
