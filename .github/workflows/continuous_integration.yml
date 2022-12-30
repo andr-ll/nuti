@@ -34,4 +34,6 @@ jobs:
         run: npm run spell
       - name: Semantic version check
         run: npm run svc
+      - name: Build check
+        run: npm run build
     timeout-minutes: 5
