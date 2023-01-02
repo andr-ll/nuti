@@ -1,7 +1,7 @@
 /**
  * @description The main file of `nuti` package.
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
- * @licence MIT
+ * @license MIT
  */
 
 import { prettyOut } from './prettyOut';
