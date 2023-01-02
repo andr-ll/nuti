@@ -2,6 +2,7 @@
 
 [![NPM version][npm-img]][npm-url]
 [![Pull Request CI][ci-img]][ci-url]
+[![Package Build][build-img]][build-url]
 
 A collection of commonly used utils for Node.js.
 
@@ -34,3 +35,5 @@ const { nuti } = require('nuti');
 [npm-url]: https://www.npmjs.com/package/nuti
 [ci-img]: https://github.com/andr-ii/nuti/actions/workflows/continuous_integration.yml/badge.svg
 [ci-url]: https://github.com/andr-ii/nuti/actions/workflows/continuous_integration.yml
+[build-img]: https://github.com/andr-ii/nuti/actions/workflows/build.yml/badge.svg
+[build-url]: https://github.com/andr-ii/nuti/actions/workflows/build.yml
