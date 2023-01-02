@@ -49,6 +49,6 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "npsh": "^1.0.5"
+    "npsh": "^1.0.6"
   }
 }
