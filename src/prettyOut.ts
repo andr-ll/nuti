@@ -1,3 +1,10 @@
+/**
+ * @description The `prettyOut` utility.
+ * @see [docs](../docs/prettyOut.md)
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @license MIT
+ */
+
 import { makeFlag } from './flag';
 
 const flag = makeFlag();

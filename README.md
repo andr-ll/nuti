@@ -1,39 +1,39 @@
-# @andr-ll/nuti
+# nuti
 
-[![Pull Request CI](https://github.com/andr-ll/nuti/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/andr-ll/nuti/actions/workflows/continuous_integration.yml)
-[![Node.js Package Release](https://github.com/andr-ll/nuti/actions/workflows/release.yml/badge.svg)](https://github.com/andr-ll/nuti/actions/workflows/release.yml)
+[![NPM version][npm-img]][npm-url]
+[![Pull Request CI][ci-img]][ci-url]
+[![Package Build][build-img]][build-url]
 
 A collection of commonly used utils for Node.js.
 
 ## Installation
 
-Make sure you have added registry configuration to `~/.npmrc` file before installation.
-
 ```bash
-echo '@andr-ll:registry=https://npm.pkg.github.com' >> ~/.npmrc
-```
-
-Then install the package:
-
-```bash
-npm i @andr-ll/nuti
+npm install nuti
 ```
 
 ## Usage
 
 ```js
 // ESM or TypeScript projects:
-import nuti from '@andr-ll/nuti';
+import nuti from 'nuti';
 
 // CommonJS projects:
-const { nuti } = require('@andr-ll/nuti');
+const { nuti } = require('nuti');
 ```
 
 ## Available utilities
 
-1. [logger](https://github.com/andr-ll/nuti/blob/master/docs/logger.md)
-2. [timeout](https://github.com/andr-ll/nuti/blob/master/docs/timeout.md)
-3. [flag](https://github.com/andr-ll/nuti/blob/master/docs/flag.md)
-4. [prettyOut](https://github.com/andr-ll/nuti/blob/master/docs/prettyOut.md)
-5. [rand](https://github.com/andr-ll/nuti/blob/master/docs/rand.md)
-6. [req](https://github.com/andr-ll/nuti/blob/master/docs/httpClient.md)
+1. [logger](./docs/logger.md)
+2. [timeout](./docs/timeout.md)
+3. [flag](./docs/flag.md)
+4. [prettyOut](./docs/prettyOut.md)
+5. [rand](./docs/rand.md)
+6. [req](./docs/httpClient.md)
+
+[npm-img]: https://img.shields.io/npm/v/nuti.svg
+[npm-url]: https://www.npmjs.com/package/nuti
+[ci-img]: https://github.com/andr-ii/nuti/actions/workflows/continuous_integration.yml/badge.svg
+[ci-url]: https://github.com/andr-ii/nuti/actions/workflows/continuous_integration.yml
+[build-img]: https://github.com/andr-ii/nuti/actions/workflows/build.yml/badge.svg
+[build-url]: https://github.com/andr-ii/nuti/actions/workflows/build.yml

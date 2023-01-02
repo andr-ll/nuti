@@ -1,3 +1,10 @@
+/**
+ * @description The `flag` utility.
+ * @see [docs](../docs/flag.md)
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @license MIT
+ */
+
 import { EventEmitter } from 'events';
 
 export class Flag {

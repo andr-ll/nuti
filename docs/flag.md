@@ -1,7 +1,7 @@
 ## Description
 
-Boolean state of some action.
-Only has value `true` or `false`, and if turned to `true` - keeps this state.
+The boolean state object, only has values `true` or `false`,
+and if turned to `true` - keeps this state.
 Can be used when different instances depend on each other.
 
 ## Usage
