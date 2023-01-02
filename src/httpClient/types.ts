@@ -1,3 +1,9 @@
+/**
+ * @description The types for `httpClient` utility.
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @licence MIT
+ */
+
 import * as http from 'http';
 
 export type Method = 'POST' | 'PUT' | 'GET' | 'DELETE';
