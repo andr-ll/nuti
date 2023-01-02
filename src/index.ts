@@ -1,3 +1,9 @@
+/**
+ * @description The main file of `nuti` package.
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @licence MIT
+ */
+
 import { prettyOut } from './prettyOut';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
