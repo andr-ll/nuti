@@ -1,7 +1,7 @@
 /**
  * @description The types for `httpClient` utility.
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
- * @licence MIT
+ * @license MIT
  */
 
 import * as http from 'http';
