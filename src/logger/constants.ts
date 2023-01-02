@@ -1,3 +1,9 @@
+/**
+ * @description The shared constants of `logger` utility.
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @licence MIT
+ */
+
 export enum LogType {
   Info = '[ info ]',
   Error = '[ error ]',
