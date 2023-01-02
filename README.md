@@ -23,12 +23,12 @@ const { nuti } = require('nuti');
 
 ## Available utilities
 
-1. [logger](https://github.com/andr-ll/nuti/blob/master/docs/logger.md)
-2. [timeout](https://github.com/andr-ll/nuti/blob/master/docs/timeout.md)
-3. [flag](https://github.com/andr-ll/nuti/blob/master/docs/flag.md)
-4. [prettyOut](https://github.com/andr-ll/nuti/blob/master/docs/prettyOut.md)
-5. [rand](https://github.com/andr-ll/nuti/blob/master/docs/rand.md)
-6. [req](https://github.com/andr-ll/nuti/blob/master/docs/httpClient.md)
+1. [logger](./docs/logger.md)
+2. [timeout](./docs/timeout.md)
+3. [flag](./docs/flag.md)
+4. [prettyOut](./docs/prettyOut.md)
+5. [rand](./docs/rand.md)
+6. [req](./docs/httpClient.md)
 
 [npm-img]: https://img.shields.io/npm/v/nuti.svg
 [npm-url]: https://www.npmjs.com/package/nuti
