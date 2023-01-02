@@ -2,7 +2,7 @@
  * @description The `logger` utility.
  * @see [docs](../../docs/logger.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
- * @licence MIT
+ * @license MIT
  */
 
 import * as fs from 'fs';
