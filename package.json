@@ -29,7 +29,7 @@
     "build": "tsc",
     "types": "tsc --noEmit",
     "format": "prettier --write '**/*.{js,json,md,ts,yml,yaml}'",
-    "format:check": "prettier --check '**/*.{js,json,md,ts,yml,yaml}'",
+    "format:check": "prettier -l '**/*.{js,json,md,ts,yml,yaml}'",
     "lint": "eslint --fix '**/*.ts'",
     "lint:check": "eslint '**/*.ts'",
     "spell": "cspell '**/*'",
