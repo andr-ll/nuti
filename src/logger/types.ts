@@ -1,3 +1,9 @@
+/**
+ * @description The types for `logger` utility.
+ * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
+ * @licence MIT
+ */
+
 import { LogType } from './constants';
 
 interface WriterArgs {
