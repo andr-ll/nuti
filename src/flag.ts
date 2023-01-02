@@ -2,7 +2,7 @@
  * @description The `flag` utility.
  * @see [docs](../docs/flag.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
- * @licence MIT
+ * @license MIT
  */
 
 import { EventEmitter } from 'events';
