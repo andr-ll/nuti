@@ -2,7 +2,7 @@
  * @description The `prettyOut` utility.
  * @see [docs](../docs/prettyOut.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
- * @licence MIT
+ * @license MIT
  */
 
 import { makeFlag } from './flag';
