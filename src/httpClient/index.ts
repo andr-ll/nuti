@@ -15,6 +15,10 @@ const protocols: Partial<Record<string, typeof http | typeof https>> = {
 };
 
 export class HttpClient {
+  /**
+   * GET request.
+   * @returns an object of specified interface (for TS only).
+   */
   async get<T extends object>(
     url: string,
     headers?: http.IncomingHttpHeaders,
@@ -25,6 +29,11 @@ export class HttpClient {
     });
   }
 
+  /**
+   * POST request.
+   * @param body Any object.
+   * @returns an object of specified interface (for TS only).
+   */
   async post<T extends object>(
     url: string,
     body: unknown,
@@ -37,6 +46,11 @@ export class HttpClient {
     });
   }
 
+  /**
+   * PUT request.
+   * @param body Any object.
+   * @returns an object of specified interface (for TS only).
+   */
   async put<T extends object>(
     url: string,
     body: unknown,
@@ -49,6 +63,11 @@ export class HttpClient {
     });
   }
 
+  /**
+   * DELETE request.
+   * @param body Any object.
+   * @returns an object of specified interface (for TS only).
+   */
   async delete<T extends object>(
     url: string,
     body: unknown,
@@ -70,7 +89,7 @@ export class HttpClient {
       const validProtocol = protocols[protocol];
 
       if (validProtocol == null) {
-        throw new Error(`Unsupported protocol: ${validProtocol}`);
+        throw new Error(`Unsupported protocol: ${protocol.replace(':', '')}`);
       }
 
       const { headers = {}, body = {}, method } = options;
@@ -95,7 +114,8 @@ export class HttpClient {
 
       const req = validProtocol.request(opts, (res) => {
         let rawData = '';
-        const status = res.statusCode ?? 500;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const status = res.statusCode!;
         const isJSON =
           res.headers['content-type']?.includes('application/json') === true;
 
@@ -114,7 +134,7 @@ export class HttpClient {
             ok: status < 400,
             contentLength,
             headers: res.headers,
-            json: isJSON ? JSON.parse(rawData) : undefined,
+            json: isJSON && status !== 204 ? JSON.parse(rawData) : undefined,
             body: rawData,
           });
         });
