@@ -12,7 +12,7 @@ export const timeout = <T>(timer = 1000, callback?: () => T | Promise<T>) =>
         const data = callback == null ? undefined : callback();
 
         if (data instanceof Promise) {
-          data.then(resolve);
+          data.then(resolve).catch(reject);
           return;
         }
 
