@@ -18,7 +18,7 @@ export class Rand {
 
   str(len = 8) {
     const buf = crypto.randomBytes(len);
-    return buf.toString('hex');
+    return buf.toString('hex').slice(0, len);
   }
 }
 
