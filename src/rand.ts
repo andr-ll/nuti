@@ -23,7 +23,9 @@ export class Rand {
    * @returns random number
    */
   numb(min = 0, max = 10) {
-    return Math.round((max - min) * Math.random()) - min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   str(len = 8) {

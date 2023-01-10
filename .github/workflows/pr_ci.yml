@@ -33,4 +33,6 @@ jobs:
         run: npm run svc
       - name: Build check
         run: npm run build
+      - name: Test
+        run: npm run test
     timeout-minutes: 5

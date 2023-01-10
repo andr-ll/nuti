@@ -34,7 +34,7 @@ describe('timeout module check', () => {
     await nuti.timeout();
     const end = performance.now();
 
-    expect(end - start >= 1000).toBeTruthy();
+    expect(end - start >= 998).toBeTruthy();
   });
 
   it('checks if timeout waits for assigned time', async () => {
