@@ -1,0 +1,30 @@
+name: upload coverage
+
+on:
+  push:
+    branches: ['master']
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare actions
+        uses: actions/checkout@v3
+      - name: Setup node env
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Collect coverage
+        run: npm run test
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+    timeout-minutes: 5

@@ -22,7 +22,7 @@ export const nuti = {
    * Async-timeout function.
    * @see [docs](../docs/timeout.md)
    *
-   * @param timer value in milliseconds to wait for.
+   * @param timer value in milliseconds to wait for (default 1 sec).
    * @param callback
    * a function which has to be executed after the timer. Can be regular function or async.
    *

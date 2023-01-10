@@ -17,14 +17,23 @@ export class Flag {
     });
   });
 
+  /**
+   * Flag state - `true` or `false` only.
+   */
   get done() {
     return this.isDone;
   }
 
+  /**
+   * Async function to wait until flag state has been changed.
+   */
   waitDone() {
     return this.waitDonePromise;
   }
 
+  /**
+   * Changes state of the flag to `true`.
+   */
   setDone() {
     if (!this.isDone) {
       this.isDone = true;
