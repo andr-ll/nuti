@@ -2,7 +2,7 @@
 
 [![NPM version][npm-img]][npm-url]
 [![Package Build][build-img]][build-url]
-[![Coverage Status][coverage-img]][https://coveralls.io/github/andr-ii/nuti?branch=master]
+[![Coverage Status][coverage-img]][coverage-url]
 
 A collection of commonly used utils for Node.js.
 
