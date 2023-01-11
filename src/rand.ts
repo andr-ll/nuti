@@ -9,15 +9,12 @@ import * as crypto from 'crypto';
 
 export class Rand {
   private letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ';
+  
   private l_len = this.letters.length;
 
   private strLtr(buf: Buffer) {
-    const b = Array.from(buf);
-
-    return b.map(i => {
-      const id = i < this.l_len 
-        ? i
-        : i % this.l_len;
+    return Array.from(buf).map((i) => {
+      const id = i < this.l_len ? i : i % this.l_len;
     
       return this.letters[id];
     }).join('');
