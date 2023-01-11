@@ -17,9 +17,9 @@ export class Rand {
     return b.map(i => {
       const id = i < this.l_len 
         ? i
-        : i % this.l_len
+        : i % this.l_len;
     
-      return letters[id]
+      return letters[id];
     }).join('');
   }
 
