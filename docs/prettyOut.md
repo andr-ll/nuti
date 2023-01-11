@@ -1,6 +1,6 @@
 ## Description
 
-A function which overrides `toString` method for object or arrays which are passed as arguments.
+A function which overrides `toString` method for objects or arrays which are passed as arguments.
 This is done to have an ability for faster writing string output with JSON values.
 
 If object has more than 3 keys, and array has length more than 3 - spaces will be added,
