@@ -19,7 +19,7 @@ export class Rand {
         ? i
         : i % this.l_len;
     
-      return letters[id];
+      return this.letters[id];
     }).join('');
   }
 
@@ -47,7 +47,7 @@ export class Rand {
     const buf = crypto.randomBytes(len);
     
     if (type === 'ltr') {
-      return strLtr(buf);
+      return this.strLtr(buf);
     }
 
     return buf.toString('hex').slice(0, len);
