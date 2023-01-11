@@ -1,10 +1,14 @@
 ## Description
 
-A function which overrides `toString` method for `Object` and `Array` constructors.
+A function which overrides `toString` method for objects or arrays which are passed as arguments.
 This is done to have an ability for faster writing string output with JSON values.
 
 If object has more than 3 keys, and array has length more than 3 - spaces will be added,
 and each `key-value` pair will be printed on the new line.
+
+> **Note**
+>
+> Please, keep in mind, once prettyOut was added to object/array it **could not be undone**.
 
 ## Usage
 
@@ -35,7 +39,7 @@ After `prettyOut()` is called:
 
 ```ts
 // Overrides `toString` method.
-nuti.prettyOut();
+nuti.prettyOut(obj, arr, bigObject);
 
 console.log(
   `An object: ${obj}\nAn array: ${arr}\nAnd a bigObject: ${bigObject}`,

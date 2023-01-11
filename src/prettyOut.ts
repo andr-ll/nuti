@@ -5,26 +5,12 @@
  * @license MIT
  */
 
-import { makeFlag } from './flag';
+export const prettyOut = (...objects: Array<object | unknown[]>): void => {
+  for (const obj of objects) {
+    const length = Array.isArray(obj) ? obj.length : Object.keys(obj).length;
 
-const flag = makeFlag();
-
-export const prettyOut = (): void => {
-  if (flag.done) {
-    return;
+    obj.toString = function () {
+      return JSON.stringify(obj, null, length > 3 ? 2 : undefined);
+    };
   }
-
-  Object.prototype.toString = function () {
-    return JSON.stringify(
-      this,
-      null,
-      Object.keys(this).length > 3 ? 2 : undefined,
-    );
-  };
-
-  Array.prototype.toString = function () {
-    return JSON.stringify(this, null, this.length > 3 ? 2 : undefined);
-  };
-
-  flag.setDone();
 };

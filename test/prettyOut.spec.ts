@@ -26,7 +26,7 @@ const bigArrResult = `some pretty big array: [
 
 describe('prettyOut function test', () => {
   it('makes console.log pretty', () => {
-    expect.assertions(4);
+    expect.assertions(5);
     const obj = {
       number: 2,
     };
@@ -40,15 +40,14 @@ describe('prettyOut function test', () => {
     const arr = ['f', 'o', 'o'];
     const bigArr = [...arr, 'b', 'a', 'r'];
 
-    nuti.prettyOut();
+    nuti.prettyOut(obj, bigObj, arr, bigArr);
 
     console.log(`some pretty object: ${obj}`);
     console.log(`some pretty big object: ${bigObj}`);
     console.log(`some pretty array: ${arr}`);
     console.log(`some pretty big array: ${bigArr}`);
 
-    // to cover return, if prettyOut was already called.
-    nuti.prettyOut();
+    console.log(`object without pretty out: ${{ someValue: 'some-value' }}`);
 
     const result = Array.from(logSpy.mock.calls.flat());
 
@@ -56,5 +55,6 @@ describe('prettyOut function test', () => {
     expect(result[1]).toBe(bigObjResult);
     expect(result[2]).toBe(arrResult);
     expect(result[3]).toBe(bigArrResult);
+    expect(result[4]).toBe('object without pretty out: [object Object]');
   });
 });
