@@ -14,15 +14,25 @@ describe('rand module test', () => {
   });
 
   it('checks if rand creates valid string', () => {
-    expect.assertions(4);
+    expect.assertions(9);
 
-    const defaultStr = nuti.rand.str();
-    const strWithLength = nuti.rand.str(15);
+    const result = {
+      [nuti.rand.str()]: 8,
+      [nuti.rand.str(15)]: 15,
+      [nuti.rand.str(4, 'base64url')]: 4,
+      [nuti.rand.str('hex')]: 8,
+    };
 
-    expect(defaultStr).toHaveLength(8);
-    expect(typeof defaultStr).toStrictEqual('string');
-    expect(strWithLength).toHaveLength(15);
-    expect(typeof strWithLength).toStrictEqual('string');
+    for (const key in result) {
+      expect(key).toHaveLength(result[key]);
+      expect(typeof key).toStrictEqual('string');
+    }
+
+    try {
+      nuti.rand.str('foo' as 'abc' | 'hex' | 'base64url');
+    } catch (error) {
+      expect(error.message).toStrictEqual('Unsupported encoding type: "foo".');
+    }
   });
 
   it('checks if rand creates valid boolean', () => {

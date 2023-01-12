@@ -16,15 +16,25 @@ console.log(rand.bool());
 
 ### str:
 
+<!-- cspell: disable -->
+
 ```ts
 const { rand } = nuti;
 
-// returns a random string with length of 8
-const str_1 = rand.str();
+// returns a random string with default length containing only alphabetic chars.
+const str_1 = rand.str(); // RDcLDbtM
 
-// returns a random string with length of 15
-const str_2 = rand.str(15);
+// returns a random string with length of 15 containing only alphabetic chars.
+const str_2 = rand.str(15); // kfBFewEhLdpeknd
+
+// returns a random string with length of 7 and 'hex' encoding.
+const str_3 = rand.str(7, 'hex'); // a92f60;
+
+// returns a random string with default length and 'base64url' encoding.
+const str_3 = rand.str('base64url'); // 8iPFjIJR;
 ```
+
+<!-- cspell: enable -->
 
 ### numb:
 
