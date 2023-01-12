@@ -30,7 +30,7 @@ export class Rand {
    * Generates a random boolean.
    * @returns `true` or `false`
    */
-  bool() {
+  public bool() {
     return Math.random() > 0.5;
   }
 
@@ -40,7 +40,7 @@ export class Rand {
    * @param max the biggest possible number (default 10)
    * @returns random number
    */
-  numb(min = 0, max = 10) {
+  public numb(min = 0, max = 10) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -49,19 +49,24 @@ export class Rand {
   /**
    * Generates a random string with length of 8 and alphabetic characters.
    */
-  str(): string;
+  public str(): string;
   /**
    * Generates a random string with given length. Also string encoding can be specified (default alphabetic).
    * @param len length of output string
-   * @param enc encoding type (optional), 'abc' (alphabetic), 'hex' or 'base64url',
+   * @param enc encoding type (optional), 'abc' (alphabetic), 'hex' or 'base64url'
    */
-  str(len: number, enc?: StringEncoding): string;
+  public str(len: number, enc?: StringEncoding): string;
   /**
    * Generates a random string with length of 8 and given type.
-   * @param enc encoding type, 'abc' (alphabetic), 'hex' or 'base64url',
+   * @param enc encoding type, 'abc' (alphabetic), 'hex' or 'base64url'
    */
-  str(enc: StringEncoding): string;
-  str(...args: [lenOrEnc?: number | StringEncoding, enc?: StringEncoding]) {
+  public str(enc: StringEncoding): string;
+  /**
+   * Implementation.
+   */
+  public str(
+    ...args: [lenOrEnc?: number | StringEncoding, enc?: StringEncoding]
+  ) {
     let [lenOrEnc = 8, enc = 'abc'] = args;
 
     if (typeof lenOrEnc === 'string') {
