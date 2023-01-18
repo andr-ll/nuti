@@ -2,7 +2,7 @@
 
 Hey!
 
-If you would like to add/improve something at `nuti` project - feel free to do it! :)
+If you would like to add/improve something at `nuti` project - feel free to do it! 🚀
 
 Just follow simple guideline:
 
