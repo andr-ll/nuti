@@ -20,5 +20,5 @@ which check how the feature works and cover all new code will be just great!
 5. Once all PR requirements are met (review, resolved comments, ci-workflow) it
 can be merged! 😎
 
-If you have any questions - feel free to contact me through [mail](andr.lyt.dev@gmail.com)
-or [telegram](https://t.me/andr_ll).
+If you have any questions - feel free to contact me through the
+[mail](mailto:andr.lyt.dev@gmail.com) or [telegram](https://t.me/andr_ll).
