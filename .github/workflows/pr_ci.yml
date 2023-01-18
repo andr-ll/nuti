@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+      - name: Creator
+        run: echo ${{ github.event.pull_request.user.login }}
       - name: Install dependencies
         run: npm install
       - name: Lint check
