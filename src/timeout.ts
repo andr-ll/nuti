@@ -5,7 +5,7 @@
  * @license MIT
  */
 
-export const timeout = <T>(timer = 1000, callback?: () => T | Promise<T>) =>
+export const timeout = <T>(timer?: number, callback?: () => T | Promise<T>) =>
   new Promise<T>((resolve, reject): void => {
     setTimeout((): void => {
       try {
@@ -20,5 +20,5 @@ export const timeout = <T>(timer = 1000, callback?: () => T | Promise<T>) =>
       } catch (error: unknown) {
         reject(error);
       }
-    }, timer);
+    }, timer ?? 1000);
   });
