@@ -8,7 +8,7 @@
 import * as crypto from 'crypto';
 
 const encodings = ['abc', 'hex', 'base64url'] as const;
-type StringEncoding = typeof encodings[number];
+type StringEncoding = (typeof encodings)[number];
 
 export class Rand {
   // cspell:disable
