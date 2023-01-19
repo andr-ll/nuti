@@ -34,6 +34,7 @@ describe('timeout module check', () => {
     await nuti.timeout();
     const end = Date.now();
 
+    console.log(end - start);
     expect(end - start >= 998).toBeTruthy();
   });
 
