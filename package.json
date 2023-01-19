@@ -1,6 +1,6 @@
 {
   "name": "nuti",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "author": "Andrii Lytovchenko <andr.lyt.dev@gmail.com>",
   "license": "MIT",
   "description": "A collection of commonly used utils for Node.js.",
@@ -17,6 +17,13 @@
   "files": [
     "lib",
     "docs"
+  ],
+  "contributors": [
+    {
+      "name": "Andrii Lytovchenko",
+      "email": "andr.lyt.dev@gmail.com",
+      "url": "https://github.com/andr-ii"
+    }
   ],
   "keywords": [
     "nodejs",
