@@ -21,7 +21,9 @@ Just follow simple guideline:
     contributors and to the edited/created file's license header.
 
 6.  Before creating a `commit` - make sure `npm run hooks` was executed and
-    `commit-message` and `pre-commit` hooks are working.
+    `commit-message` and `pre-commit` hooks are working. The project is set up
+    with a requirement to **manually** update semantic version, so don't forget
+    to update it at the `package.json` version.
 
 7.  Once all PR requirements are met (review, resolved comments, ci-workflow pass) it
     is ready be merged! 😎
