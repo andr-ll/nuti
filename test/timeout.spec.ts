@@ -30,9 +30,9 @@ describe('timeout module check', () => {
   it('checks if timeout waits for default time - 1 second', async () => {
     expect.assertions(1);
 
-    const start = performance.now();
+    const start = Date.now();
     await nuti.timeout();
-    const end = performance.now();
+    const end = Date.now();
 
     expect(end - start >= 998).toBeTruthy();
   });
