@@ -33,7 +33,7 @@ const { nuti } = require('nuti');
 
 [npm-img]: https://img.shields.io/npm/v/nuti.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/nuti
-[build-img]: https://github.com/andr-ii/nuti/actions/workflows/build.yml/badge.svg
+[build-img]: https://img.shields.io/github/actions/workflow/status/andr-ii/nuti/build.yml?logo=github
 [build-url]: https://github.com/andr-ii/nuti/actions/workflows/build.yml
 [coverage-img]: https://img.shields.io/coverallsCoverage/github/andr-ii/nuti?label=coverage&logo=jest
 [coverage-url]: https://coveralls.io/github/andr-ii/nuti?branch=master
