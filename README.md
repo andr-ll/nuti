@@ -3,6 +3,7 @@
 [![NPM version][npm-img]][npm-url]
 [![Package Build][build-img]][build-url]
 [![Coverage Status][coverage-img]][coverage-url]
+[![GitHub][license-pic]][license-url]
 
 A collection of commonly used utils for Node.js.
 
@@ -37,3 +38,5 @@ const { nuti } = require('nuti');
 [build-url]: https://github.com/andr-ii/nuti/actions/workflows/build.yml
 [coverage-img]: https://img.shields.io/coverallsCoverage/github/andr-ii/nuti?label=coverage&logo=jest
 [coverage-url]: https://coveralls.io/github/andr-ii/nuti?branch=master
+[license-pic]: https://img.shields.io/github/license/andr-ii/nuti?color=blue&label=%C2%A9%20license
+[license-url]: https://github.com/andr-ii/nuti/blob/master/LICENSE
