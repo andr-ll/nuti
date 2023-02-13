@@ -1,9 +1,9 @@
 # nuti
 
-[![NPM version][npm-img]][npm-url]
-[![Package Build][build-img]][build-url]
-[![Coverage Status][coverage-img]][coverage-url]
-[![GitHub][license-pic]][license-url]
+[![NPM][npm-img]][npm-url]
+[![Build][build-img]][build-url]
+[![Coverage][coverage-img]][coverage-url]
+[![License][license-pic]][license-url]
 
 A collection of commonly used utils for Node.js.
 
