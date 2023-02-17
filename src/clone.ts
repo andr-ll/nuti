@@ -8,40 +8,50 @@ enum SerializedTypes {
   MAP = 'MAP',
   SET = 'SET',
   INFINITY = 'INFINITY',
+  NAN = 'NAN',
 }
 
 function stringifyReplacer(key: string, value: unknown) {
-  if (this[key] instanceof Date) {
+  const realValue = this[key];
+
+  if (realValue instanceof Date) {
     return {
       [SerializedKeys.TYPE]: SerializedTypes.DATE,
       [SerializedKeys.VALUE]: value,
     };
   }
 
-  if (this[key] instanceof Map) {
+  if (realValue instanceof Map) {
     return {
       [SerializedKeys.TYPE]: SerializedTypes.MAP,
-      [SerializedKeys.VALUE]: Array.from(this[key].entries()),
+      [SerializedKeys.VALUE]: Array.from(realValue.entries()),
     };
   }
 
-  if (this[key] instanceof Set) {
+  if (realValue instanceof Set) {
     return {
       [SerializedKeys.TYPE]: SerializedTypes.SET,
-      [SerializedKeys.VALUE]: Array.from(this[key]),
+      [SerializedKeys.VALUE]: Array.from(realValue),
     };
   }
 
-  if (this[key] === Infinity) {
+  if (realValue === Infinity) {
     return {
       [SerializedKeys.TYPE]: SerializedTypes.INFINITY,
       [SerializedKeys.VALUE]: 'Infinity',
     };
   }
 
-  if (this[key] === -Infinity) {
+  if (realValue === -Infinity) {
     return {
       [SerializedKeys.TYPE]: SerializedTypes.INFINITY,
+      [SerializedKeys.VALUE]: null,
+    };
+  }
+
+  if (typeof realValue === 'number' && Number.isNaN(realValue)) {
+    return {
+      [SerializedKeys.TYPE]: SerializedTypes.NAN,
       [SerializedKeys.VALUE]: null,
     };
   }
@@ -70,6 +80,8 @@ function parseReplacer(
         return new Set(serializedValue as Array<unknown>);
       case SerializedTypes.INFINITY:
         return serializedValue === 'Infinity' ? Infinity : -Infinity;
+      case SerializedTypes.NAN:
+        return NaN;
       default:
         return value;
     }
