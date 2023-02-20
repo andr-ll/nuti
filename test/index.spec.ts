@@ -11,6 +11,7 @@ describe('main module test', () => {
       'makeFlag',
       'rand',
       'req',
+      'clone',
     ]);
   });
 });

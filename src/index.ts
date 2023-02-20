@@ -12,6 +12,7 @@ import { rand } from './rand';
 import { req } from './httpClient';
 
 import type * as LogTypes from './logger/types';
+import { clone } from './clone';
 
 export type Types = {
   LoggerOptions: LogTypes.LoggerOptions;
@@ -63,6 +64,11 @@ export const nuti = {
    * @see [docs](../docs/httpClient.md)
    */
   req,
+  /**
+   * A function for creating deep cloned Objects or Arrays.
+   * @see [decs](../docs/clone.md)
+   */
+  clone,
 };
 
 export default nuti;

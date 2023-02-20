@@ -1,15 +1,4 @@
-enum SerializedKeys {
-  TYPE = '[ $serialized__type$ ]',
-  VALUE = '[ $serialized__value$ ]',
-}
-
-enum SerializedTypes {
-  DATE = 'DATE',
-  MAP = 'MAP',
-  SET = 'SET',
-  INFINITY = 'INFINITY',
-  NAN = 'NAN',
-}
+import { OmitMethods, SerializedKeys, SerializedTypes } from './types';
 
 function stringifyReplacer(key: string, value: unknown) {
   const realValue = this[key];
@@ -82,46 +71,16 @@ function parseReplacer(
         return serializedValue === 'Infinity' ? Infinity : -Infinity;
       case SerializedTypes.NAN:
         return NaN;
-      default:
-        return value;
     }
   }
 
   return value;
 }
 
-export const clone = <T extends Record<string, unknown>>(obj: T): T => {
-  const stringifiedValue = JSON.stringify(obj, stringifyReplacer);
+export const clone = <T extends object | Array<unknown>>(
+  entity: T,
+): OmitMethods<T> => {
+  const stringifiedValue = JSON.stringify(entity, stringifyReplacer);
 
   return JSON.parse(stringifiedValue, parseReplacer);
 };
-
-const f = {
-  d: new Date(),
-  s: new Set(['foo', 'foo', 'bar']),
-  b: {
-    bb: new Date(),
-    c: {
-      a: new Date(),
-      d: new Map([['one key', new Map().set('two key', 'fff')]]),
-    },
-  },
-  c: {
-    foo: 'bas',
-  },
-  arr: [new Date(), new Date(), new Date()],
-  i: Infinity,
-  ni: -Infinity,
-};
-
-const fff = clone(f);
-
-console.log(fff.d instanceof Date);
-console.log(fff.b.bb instanceof Date);
-console.log(fff.b.c.a instanceof Date);
-console.log(fff.arr.every((i) => i instanceof Date));
-console.log(fff.b.c.d.get('one key'));
-console.log(fff.s.size);
-console.log(fff.s.has('foo'));
-console.log(fff.i === Infinity);
-console.log(fff.ni === -Infinity);
