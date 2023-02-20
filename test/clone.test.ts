@@ -31,18 +31,20 @@ const classInstance = new ClassToClone();
 
 describe('clone module test', () => {
   it('checks if clones object', () => {
-    expect.assertions(15);
+    expect.assertions(19);
 
     const clonedObject = nuti.clone(defaultObject);
 
     expect(clonedObject === defaultObject).not.toBeTruthy();
+    expect(clonedObject.nested === defaultObject.nested).not.toBeTruthy();
+    expect(clonedObject.map === defaultObject.map).not.toBeTruthy();
+    expect(clonedObject.set === defaultObject.set).not.toBeTruthy();
     expect(clonedObject.name).toStrictEqual(defaultObject.name);
     expect(clonedObject.numb).toStrictEqual(defaultObject.numb);
-    expect(clonedObject.infinity).toStrictEqual(defaultObject.infinity);
-    expect(clonedObject.negative_infinity).toStrictEqual(
-      defaultObject.negative_infinity,
-    );
+    expect(clonedObject.infinity).toStrictEqual(Infinity);
+    expect(clonedObject.negative_infinity).toStrictEqual(-Infinity);
     expect(clonedObject.date === defaultObject.date).not.toBeTruthy();
+    expect(clonedObject.date instanceof Date).toBeTruthy();
     expect(clonedObject.date.toISOString()).toStrictEqual(
       defaultObject.date.toISOString(),
     );
