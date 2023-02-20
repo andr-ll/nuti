@@ -1,4 +1,4 @@
-/**
+/*!
  * @description The `logger` utility.
  * @see [docs](../../docs/logger.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>

@@ -1,4 +1,4 @@
-/**
+/*!
  * @description The `httpClient` utility.
  * @see [docs](../../docs/httpClient.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>

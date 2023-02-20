@@ -34,8 +34,19 @@ describe('timeout module check', () => {
     await nuti.timeout();
     const end = Date.now();
 
-    console.log(end - start);
     expect(end - start >= 998).toBeTruthy();
+  });
+
+  it('checks if timeout waits for default time - 1 second if callback is passed', async () => {
+    expect.assertions(3);
+
+    const start = Date.now();
+    const result = await nuti.timeout(() => 10);
+    const end = Date.now();
+
+    expect(end - start >= 998).toBeTruthy();
+    expect(typeof result).toStrictEqual('number');
+    expect(result).toStrictEqual(10);
   });
 
   it('checks if timeout waits for assigned time', async () => {
@@ -96,3 +107,5 @@ describe('timeout module check', () => {
     expect(result).toStrictEqual(10);
   });
 });
+
+nuti.timeout(() => 2);

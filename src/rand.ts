@@ -1,4 +1,4 @@
-/**
+/*!
  * @description The `rand` utility.
  * @see [docs](../docs/rand.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>

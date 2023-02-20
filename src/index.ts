@@ -31,7 +31,7 @@ export const nuti = {
    * @example const value = await nuti.timeout(3000, () => 'some-value');
    * console.log(value); // prints 'some-value' after 3 sec.
    *
-   * @returns Value which will be returned from a `callback` function or void.
+   * @returns Value which will be returned from a `callback` function or undefined.
    */
   timeout,
   /**
