@@ -65,7 +65,7 @@ export const nuti = {
    */
   req,
   /**
-   * A function for creating deep cloned Objects or Arrays.
+   * A function for creating deep clones of Objects or Arrays.
    * @see [decs](../docs/clone.md)
    */
   clone,
