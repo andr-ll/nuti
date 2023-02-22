@@ -197,9 +197,7 @@ Expected output:
 Lets pretend your server has responds with `json` content-type for `404 Not Found` cases:
 
 ```ts
-const response = await nuti.req.get('http://localhost:3000/foo', {
-  'content-type': 'text/html',
-});
+const response = await nuti.req.get('http://localhost:3000/not-found');
 
 console.log(response);
 ```
