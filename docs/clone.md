@@ -35,7 +35,7 @@ class SomeClass {
   name = 'some-name';
   date = new Date();
   nested = {
-    name: 'new object'
+    name: 'new object',
   };
 
   sayHi() {
