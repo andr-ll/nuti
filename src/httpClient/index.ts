@@ -80,42 +80,20 @@ export class HttpClient {
     });
   }
 
-  private async request<T extends object>(
-    url: string,
-    options: RequestOptions,
-  ) {
+  /**
+   * Main request's handler.
+   * @returns Promise which will be resolved **after** response stream is finished.
+   */
+  private async request<T>(url: string, options: RequestOptions) {
     return new Promise<Response<T>>((resolve, reject) => {
-      const { protocol, hostname, port, pathname, host } = new URL(url);
-      const validProtocol = protocols[protocol];
-
-      if (validProtocol == null) {
-        throw new Error(`Unsupported protocol: ${protocol.replace(':', '')}`);
-      }
-
-      const { headers = {}, body = {}, method } = options;
-      const stringReqBody = JSON.stringify(body);
-
-      if (headers['content-type'] == null) {
-        Object.assign(headers, {
-          'content-type': 'application/json',
-          'content-length': stringReqBody.length,
-        });
-      }
-
-      const opts: http.RequestOptions = {
-        protocol,
-        hostname,
-        host,
-        port,
-        path: pathname,
-        headers,
-        method,
-      };
+      const { opts, validProtocol, rawReqBody } = this.validateReqInput({
+        ...options,
+        url,
+      });
 
       const req = validProtocol.request(opts, (res) => {
         let rawData = '';
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const status = res.statusCode!;
+        const status = res.statusCode as number;
         const isJSON =
           res.headers['content-type']?.includes('application/json') === true;
 
@@ -143,9 +121,47 @@ export class HttpClient {
       });
 
       req.on('error', reject);
-      req.write(stringReqBody);
+      req.write(rawReqBody);
       req.end();
     });
+  }
+
+  /**
+   * Function for validation request input.
+   * @param payload options for request and url
+   * @returns valid request options, raw request body and valid protocol (http(s))
+   */
+  private validateReqInput(payload: RequestOptions & { url: string }) {
+    const { headers = {}, body = {}, method, url } = payload;
+    const { protocol, hostname, port, pathname, host } = new URL(url);
+    const validProtocol = protocols[protocol];
+
+    if (validProtocol == null) {
+      throw new Error(`Unsupported protocol: ${protocol.replace(':', '')}`);
+    }
+
+    const rawReqBody = JSON.stringify(body);
+
+    if (headers['content-type'] == null) {
+      Object.assign(headers, {
+        'content-type': 'application/json',
+        'content-length': rawReqBody.length,
+      });
+    }
+
+    return {
+      opts: {
+        protocol,
+        hostname,
+        host,
+        port,
+        path: pathname,
+        headers,
+        method,
+      },
+      validProtocol,
+      rawReqBody,
+    };
   }
 }
 
