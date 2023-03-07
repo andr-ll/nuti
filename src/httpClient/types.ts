@@ -8,7 +8,7 @@ import * as http from 'http';
 
 export type Method = 'POST' | 'PUT' | 'GET' | 'DELETE';
 
-export interface Response<T extends object> {
+export interface Response<T> {
   status: number;
   contentLength: number;
   ok: boolean;
