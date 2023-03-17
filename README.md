@@ -32,6 +32,7 @@ const { nuti } = require('nuti');
 5. [rand](./docs/rand.md)
 6. [req](./docs/httpClient.md)
 7. [clone](./docs/clone.md)
+8. [floats](./docs/floats.md)
 
 [npm-img]: https://img.shields.io/npm/v/nuti.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/nuti

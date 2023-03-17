@@ -1,4 +1,4 @@
-/**
+/*!
  * @description The main file of `nuti` package.
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
  * @license MIT
@@ -13,6 +13,7 @@ import { req } from './httpClient';
 
 import type * as LogTypes from './logger/types';
 import { clone } from './clone';
+import { floats } from './floats';
 
 export type Types = {
   LoggerOptions: LogTypes.LoggerOptions;
@@ -53,8 +54,8 @@ export const nuti = {
    */
   makeFlag,
   /**
-   * An object with methods to generate random `string`,
-   * `number` and `boolean` types.
+   * A helper for generating random `string`, `number`
+   * and `boolean` values.
    * @see [docs](../docs/rand.md)
    */
   rand,
@@ -69,6 +70,11 @@ export const nuti = {
    * @see [decs](../docs/clone.md)
    */
   clone,
+  /**
+   * A helper for performing valid mathematical operations with floats.
+   * @see [docs](../docs/floats.md)
+   */
+  floats,
 };
 
 export default nuti;

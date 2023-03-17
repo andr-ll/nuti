@@ -12,6 +12,7 @@ describe('main module test', () => {
       'rand',
       'req',
       'clone',
+      'floats',
     ]);
   });
 });
