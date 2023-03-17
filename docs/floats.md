@@ -12,7 +12,7 @@ after the decimal point.
 >
 > The `add`, `subtract` and `multiply` helpers are able to get as many numbers as needed.
 >
-> The `divide` helpers supports **only 2 numbers** - dividend and divisor.
+> The `divide` helper supports **only 2 numbers** - dividend and divisor.
 
 ## Usage
 
