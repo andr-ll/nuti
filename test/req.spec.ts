@@ -40,6 +40,14 @@ describe('error handling', () => {
       expect(error.message).toStrictEqual('Unsupported protocol: ftp');
     }
   });
+
+  it('throws and error and calls catch', async () => {
+    expect.assertions(1);
+
+    await nuti.req.get('ftp://localhost:3000').catch((error) => {
+      expect(error.message).toStrictEqual('Unsupported protocol: ftp');
+    });
+  });
 });
 
 describe('req module test', () => {
@@ -57,6 +65,21 @@ describe('req module test', () => {
     server.close();
   });
 
+  it('makes get request with valid headers', async () => {
+    expect.assertions(2);
+
+    const server = createServer();
+
+    const response = await nuti.req
+      .get<{ data: string }>('http://localhost:3000')
+      .headers({ 'accept-language': 'ENG' });
+
+    expect(response.json).not.toBeUndefined();
+    expect(response.json?.data).toStrictEqual('some data');
+
+    server.close();
+  });
+
   it('makes post request', async () => {
     expect.assertions(2);
 
@@ -65,10 +88,10 @@ describe('req module test', () => {
       body: { created: 'success' },
     });
 
-    const response = await nuti.req.post<{ created: string }>(
-      'http://localhost:3000',
-      { data: 'some-data' },
-    );
+    const response = await nuti.req
+      .post<{ created: string }>('http://localhost:3000')
+      .body({ data: 'some-data' });
+
     expect(response.json).not.toBeUndefined();
     expect(response.json?.created).toStrictEqual('success');
 
@@ -83,10 +106,10 @@ describe('req module test', () => {
       body: { updated: 'success' },
     });
 
-    const response = await nuti.req.put<{ updated: string }>(
-      'http://localhost:3000',
-      { data: 'some-data' },
-    );
+    const response = await nuti.req
+      .put<{ updated: string }>('http://localhost:3000')
+      .body({ data: 'some-data' });
+
     expect(response.json).not.toBeUndefined();
     expect(response.json?.updated).toStrictEqual('success');
 
@@ -101,12 +124,28 @@ describe('req module test', () => {
       body: null,
     });
 
-    const response = await nuti.req.delete('http://localhost:3000', {
-      data: 'some-data',
-    });
+    const response = await nuti.req
+      .delete('http://localhost:3000')
+      .body({ data: 'some-data' });
+
     expect(response.json).toBeUndefined();
     expect(response.status).toStrictEqual(204);
     expect(response.contentLength).toStrictEqual(0);
+
+    server.close();
+  });
+
+  it('makes get request and changes value with finally', async () => {
+    expect.assertions(3);
+
+    const server = createServer();
+
+    const response = await nuti.req
+      .get<{ data: string }>('http://localhost:3000')
+      .finally(() => expect(1).toStrictEqual(1));
+
+    expect(response.json).not.toBeUndefined();
+    expect(response.json?.data).toStrictEqual('some data');
 
     server.close();
   });

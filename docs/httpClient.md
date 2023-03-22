@@ -50,9 +50,9 @@ Expected output:
 ### POST
 
 ```ts
-const response = await nuti.req.post('http://localhost:3000/user', {
-  name: 'some new user',
-});
+const response = await nuti.req
+  .post('http://localhost:3000/user')
+  .body({ name: 'some new user' });
 
 console.log(response);
 ```
@@ -80,9 +80,9 @@ Expected output:
 ### PUT
 
 ```ts
-const response = await nuti.req.put('http://localhost:3000/user', {
-  name: 'some updated user',
-});
+const response = await nuti.req
+  .put('http://localhost:3000/user')
+  .body({ name: 'some updated user' });
 
 console.log(response);
 ```
@@ -110,9 +110,9 @@ Expected output:
 ### DELETE
 
 ```ts
-const response = await nuti.req.delete('http://localhost:3000/user', {
-  name: 'some user',
-});
+const response = await nuti.req
+  .delete('http://localhost:3000/user')
+  .body({ name: 'some user' });
 
 console.log(response);
 ```
@@ -168,9 +168,9 @@ The "id" field has type "number" and value "123"
 ### NOT JSON CONTENT-TYPE
 
 ```ts
-const response = await nuti.req.get('http://localhost:3000/', {
-  'content-type': 'text/html',
-});
+const response = await nuti.req
+  .get('http://localhost:3000/')
+  .headers({ 'content-type': 'text/html' });
 
 console.log(response);
 ```
