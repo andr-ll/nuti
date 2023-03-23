@@ -4,12 +4,12 @@
  * @license MIT
  */
 
-import { prettyOut } from './prettyOut';
+import { prettify } from './prettify';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
 import { makeFlag } from './flag';
 import { rand } from './rand';
-import { req } from './httpClient';
+import { http } from './httpClient';
 
 import type * as LogTypes from './logger/types';
 import { clone } from './clone';
@@ -38,9 +38,9 @@ export const nuti = {
   timeout,
   /**
    * A function which overrides `toString` method for Objects and Arrays.
-   * @see [docs](../docs/prettyOut.md)
+   * @see [docs](../docs/prettify.md)
    */
-  prettyOut,
+  prettify,
   /**
    * A function for creating a logger with ability to write file logs.
    * @see [docs](../docs/logger.md)
@@ -64,7 +64,7 @@ export const nuti = {
    * 'PUT', 'DELETE' requests.
    * @see [docs](../docs/httpClient.md)
    */
-  req,
+  http,
   /**
    * A function for creating deep clones of Objects or Arrays.
    * @see [decs](../docs/clone.md)

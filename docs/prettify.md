@@ -8,7 +8,7 @@ and each `key-value` pair will be printed on the new line.
 
 > **Note**
 >
-> Please, keep in mind, once prettyOut was added to object/array it **could not be undone**.
+> Please, keep in mind, once `prettify` was added to object/array it **could not be undone**.
 
 ## Usage
 
@@ -35,11 +35,11 @@ An array: 2,3,4
 And a bigObject: [object Object]
 ```
 
-After `prettyOut()` is called:
+After `prettify()` is called:
 
 ```ts
 // Overrides `toString` method.
-nuti.prettyOut(obj, arr, bigObject);
+nuti.prettify(obj, arr, bigObject);
 
 console.log(
   `An object: ${obj}\nAn array: ${arr}\nAnd a bigObject: ${bigObject}`,

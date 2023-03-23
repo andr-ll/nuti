@@ -43,4 +43,4 @@ export class HttpClient {
   }
 }
 
-export const req = new HttpClient();
+export const http = new HttpClient();

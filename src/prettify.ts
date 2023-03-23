@@ -1,11 +1,11 @@
 /*!
- * @description The `prettyOut` utility.
- * @see [docs](../docs/prettyOut.md)
+ * @description The `prettify` utility.
+ * @see [docs](../docs/prettify.md)
  * @author Andrii Lytovchenko <andr.lyt.dev@gmail.com>
  * @license MIT
  */
 
-export const prettyOut = (...objects: Array<object | unknown[]>): void => {
+export const prettify = (...objects: Array<object | unknown[]>): void => {
   for (const obj of objects) {
     const length = Array.isArray(obj) ? obj.length : Object.keys(obj).length;
 

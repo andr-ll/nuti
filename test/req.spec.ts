@@ -35,7 +35,7 @@ describe('error handling', () => {
     expect.assertions(1);
 
     try {
-      await nuti.req.get('ftp://localhost:3000');
+      await nuti.http.get('ftp://localhost:3000');
     } catch (error) {
       expect(error.message).toStrictEqual('Unsupported protocol: ftp');
     }
@@ -44,19 +44,19 @@ describe('error handling', () => {
   it('throws and error and calls catch', async () => {
     expect.assertions(1);
 
-    await nuti.req.get('ftp://localhost:3000').catch((error) => {
+    await nuti.http.get('ftp://localhost:3000').catch((error) => {
       expect(error.message).toStrictEqual('Unsupported protocol: ftp');
     });
   });
 });
 
-describe('req module test', () => {
+describe('http module test', () => {
   it('makes get request', async () => {
     expect.assertions(2);
 
     const server = createServer();
 
-    const response = await nuti.req.get<{ data: string }>(
+    const response = await nuti.http.get<{ data: string }>(
       'http://localhost:3000',
     );
     expect(response.json).not.toBeUndefined();
@@ -70,7 +70,7 @@ describe('req module test', () => {
 
     const server = createServer();
 
-    const response = await nuti.req
+    const response = await nuti.http
       .get<{ data: string }>('http://localhost:3000')
       .headers({ 'accept-language': 'ENG' });
 
@@ -88,7 +88,7 @@ describe('req module test', () => {
       body: { created: 'success' },
     });
 
-    const response = await nuti.req
+    const response = await nuti.http
       .post<{ created: string }>('http://localhost:3000')
       .body({ data: 'some-data' });
 
@@ -106,7 +106,7 @@ describe('req module test', () => {
       body: { updated: 'success' },
     });
 
-    const response = await nuti.req
+    const response = await nuti.http
       .put<{ updated: string }>('http://localhost:3000')
       .body({ data: 'some-data' });
 
@@ -124,7 +124,7 @@ describe('req module test', () => {
       body: null,
     });
 
-    const response = await nuti.req
+    const response = await nuti.http
       .delete('http://localhost:3000')
       .body({ data: 'some-data' });
 
@@ -140,7 +140,7 @@ describe('req module test', () => {
 
     const server = createServer();
 
-    const response = await nuti.req
+    const response = await nuti.http
       .get<{ data: string }>('http://localhost:3000')
       .finally(() => expect(1).toStrictEqual(1));
 

@@ -20,7 +20,7 @@ stream features**.
 ### GET
 
 ```ts
-const response = await nuti.req.get('http://localhost:3000/user');
+const response = await nuti.http.get('http://localhost:3000/user');
 
 console.log(response);
 ```
@@ -50,7 +50,7 @@ Expected output:
 ### POST
 
 ```ts
-const response = await nuti.req
+const response = await nuti.http
   .post('http://localhost:3000/user')
   .body({ name: 'some new user' });
 
@@ -80,7 +80,7 @@ Expected output:
 ### PUT
 
 ```ts
-const response = await nuti.req
+const response = await nuti.http
   .put('http://localhost:3000/user')
   .body({ name: 'some updated user' });
 
@@ -110,7 +110,7 @@ Expected output:
 ### DELETE
 
 ```ts
-const response = await nuti.req
+const response = await nuti.http
   .delete('http://localhost:3000/user')
   .body({ name: 'some user' });
 
@@ -148,7 +148,9 @@ interface UserResponse {
   id: number;
 }
 
-const { json } = await nuti.req.get<UserResponse>('http://localhost:3000/user');
+const { json } = await nuti.http.get<UserResponse>(
+  'http://localhost:3000/user',
+);
 
 if (json != null) {
   const { name, id } = json;
@@ -168,7 +170,7 @@ The "id" field has type "number" and value "123"
 ### NOT JSON CONTENT-TYPE
 
 ```ts
-const response = await nuti.req
+const response = await nuti.http
   .get('http://localhost:3000/')
   .headers({ 'content-type': 'text/html' });
 
@@ -200,7 +202,7 @@ Expected output:
 Lets pretend your server has responds with `json` content-type for `404 Not Found` cases:
 
 ```ts
-const response = await nuti.req.get('http://localhost:3000/not-found');
+const response = await nuti.http.get('http://localhost:3000/not-found');
 
 console.log(response);
 ```

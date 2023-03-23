@@ -28,9 +28,9 @@ const { nuti } = require('nuti');
 1. [logger](./docs/logger.md)
 2. [timeout](./docs/timeout.md)
 3. [flag](./docs/flag.md)
-4. [prettyOut](./docs/prettyOut.md)
+4. [prettify](./docs/prettify.md)
 5. [rand](./docs/rand.md)
-6. [req](./docs/httpClient.md)
+6. [http](./docs/httpClient.md)
 7. [clone](./docs/clone.md)
 8. [floats](./docs/floats.md)
 
