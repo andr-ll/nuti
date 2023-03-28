@@ -6,8 +6,8 @@ Here is a simple http(s) client which allows to perform
 Also response will contain **parsed json** and could return it
 with a type if it specified as generic (TS only).
 
-Implemented for convenience with types, but **does not support response
-stream features**.
+Implemented for convenience with types, and ability to chain request
+methods. Also supports `pipe` method for streaming response to writable/duplex stream.
 
 ## Usage
 
