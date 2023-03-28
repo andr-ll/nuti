@@ -144,7 +144,7 @@ Expected output:
 If troubles with API for performing requests to are possible - `retry`
 method can handle such requests and automatically perform new one.
 
-By default retries to requiest in 10 seconds.
+By default retries to do request in 10 seconds.
 
 Following example will perform up to 3 additional requests, if main request has failed:
 
@@ -175,7 +175,7 @@ Allows to pipe response to any `writable`/`duplex` stream. Also returns response
 const stream = fs.createWriteStream('out.json');
 
 const response = await nuti.http
-  .get('http://localhost:3000/possible-unavailable')
+  .get('http://localhost:3000/users')
   .pipe(stream);
 ```
 
