@@ -1,10 +1,13 @@
 import * as http from 'http';
 import nuti from '../src';
+import { Logger } from '../src/logger';
+import * as fs from 'fs';
 
 interface CreateServerOptions {
   status?: number;
   contentType?: string;
   body?: unknown;
+  fails?: number;
 }
 
 const createServer = (options: CreateServerOptions = {}) => {
@@ -12,8 +15,15 @@ const createServer = (options: CreateServerOptions = {}) => {
     status = 200,
     contentType = 'application/json',
     body = { data: 'some data' },
+    fails = 0,
   } = options;
+  let failRequest = fails;
   const server = http.createServer((_, res) => {
+    if (failRequest > 0) {
+      res.destroy();
+      failRequest -= 1;
+    }
+
     const jsonBody = JSON.stringify(body == null ? '' : body);
     const headers = {
       'Content-Type': contentType,
@@ -47,6 +57,32 @@ describe('error handling', () => {
     await nuti.http.get('ftp://localhost:3000').catch((error) => {
       expect(error.message).toStrictEqual('Unsupported protocol: ftp');
     });
+  });
+
+  it('throws and error if retry option interval is not valid', async () => {
+    expect.assertions(1);
+
+    try {
+      await nuti.http
+        .get('ftp://localhost:3000')
+        .retry({ attempts: 2, interval: -1 });
+    } catch (error) {
+      expect(error.message).toStrictEqual(
+        'Retry interval must not be less than 0',
+      );
+    }
+  });
+
+  it('throws and error if retry option attempts is not valid', async () => {
+    expect.assertions(1);
+
+    try {
+      await nuti.http.get('ftp://localhost:3000').retry({ attempts: -2 });
+    } catch (error) {
+      expect(error.message).toStrictEqual(
+        'Retry attempts must not be less than 0',
+      );
+    }
   });
 });
 
@@ -143,6 +179,45 @@ describe('http module test', () => {
     const response = await nuti.http
       .get<{ data: string }>('http://localhost:3000')
       .finally(() => expect(1).toStrictEqual(1));
+
+    expect(response.json).not.toBeUndefined();
+    expect(response.json?.data).toStrictEqual('some data');
+
+    server.close();
+  });
+
+  it('makes get request with retries', async () => {
+    expect.assertions(2);
+
+    jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => {});
+
+    const server = createServer({ fails: 2 });
+
+    const response = await nuti.http
+      .get<{ data: string }>('http://localhost:3000')
+      .retry({ attempts: 3, interval: 1, logOnRetry: true });
+    expect(response.json).not.toBeUndefined();
+    expect(response.json?.data).toStrictEqual('some data');
+
+    server.close();
+  });
+
+  it('pipes response to the stream and overrides retry logic', async () => {
+    expect.assertions(2);
+
+    const stream = fs.createWriteStream('./test.log');
+
+    jest
+      .spyOn(fs.WriteStream.prototype, 'write')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation((() => {}) as any);
+
+    const server = createServer();
+
+    const response = await nuti.http
+      .get<{ data: string }>('http://localhost:3000')
+      .pipe(stream)
+      .retry({ attempts: 3, interval: 1, logOnRetry: true });
 
     expect(response.json).not.toBeUndefined();
     expect(response.json?.data).toStrictEqual('some data');

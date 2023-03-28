@@ -134,6 +134,51 @@ Expected output:
 }
 ```
 
+### Retry
+
+> **Note**
+>
+> If `retry` method was called - `pipe` method will be disregarded.
+
+**Does not mean to be used for 400+ status codes, but for connection errors and etc.**
+If troubles with API for performing requests to are possible - `retry`
+method can handle such requests and automatically perform new one.
+
+By default retries to requiest in 10 seconds.
+
+Following example will perform up to 3 additional requests, if main request has failed:
+
+```ts
+const response = await nuti.http
+  .get('http://localhost:3000/possible-unavailable')
+  .retry({ attempts: 3 });
+```
+
+Also, next request time can be specified (example - 25 seconds), and log can be added:
+
+```ts
+const response = await nuti.http
+  .get('http://localhost:3000/possible-unavailable')
+  .retry({ attempts: 3, interval: 25, logOnRetry: true });
+```
+
+### Pipe
+
+> **Note**
+>
+> If `retry` method was called - `pipe` method will be disregarded.
+
+Allows to pipe response to any `writable`/`duplex` stream. Also returns response as
+`nuti.http.get()` request:
+
+```ts
+const stream = fs.createWriteStream('out.json');
+
+const response = await nuti.http
+  .get('http://localhost:3000/possible-unavailable')
+  .pipe(stream);
+```
+
 ### TS GENERIC TYPES
 
 > **Note**
@@ -197,9 +242,9 @@ Expected output:
 }
 ```
 
-### FAILED REQUEST
+### 400+ status code responses
 
-Lets pretend your server has responds with `json` content-type for `404 Not Found` cases:
+Lets pretend your server responds with `json` content-type for `404 Not Found` cases:
 
 ```ts
 const response = await nuti.http.get('http://localhost:3000/not-found');

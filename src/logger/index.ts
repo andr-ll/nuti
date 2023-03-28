@@ -69,4 +69,10 @@ export class Logger {
   }
 }
 
+/**
+ * A function for creating a logger with ability to write file logs.
+ * @see [docs](../docs/logger.md)
+ *
+ * @param options {@link LoggerOptions asc}
+ */
 export const makeLogger = (options?: LoggerOptions) => new Logger(options);

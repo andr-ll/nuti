@@ -5,14 +5,18 @@
  * @license MIT
  */
 
+import { Logger } from '../logger';
 import { Request } from './request';
+
 export class HttpClient {
+  private logger = new Logger();
+
   /**
    * GET request.
    * @returns an object of specified interface (for TS only).
    */
   get<T extends object>(url: string) {
-    return new Request<T, 'GET'>(url, 'GET');
+    return new Request<T, 'GET'>(url, 'GET', this.logger);
   }
 
   /**
@@ -21,7 +25,7 @@ export class HttpClient {
    * @returns an object of specified interface (for TS only).
    */
   post<T extends object>(url: string) {
-    return new Request<T, 'POST'>(url, 'POST');
+    return new Request<T, 'POST'>(url, 'POST', this.logger);
   }
 
   /**
@@ -30,7 +34,7 @@ export class HttpClient {
    * @returns an object of specified interface (for TS only).
    */
   put<T extends object>(url: string) {
-    return new Request<T, 'PUT'>(url, 'PUT');
+    return new Request<T, 'PUT'>(url, 'PUT', this.logger);
   }
 
   /**
@@ -39,7 +43,7 @@ export class HttpClient {
    * @returns an object of specified interface (for TS only).
    */
   delete<T extends object>(url: string) {
-    return new Request<T, 'DELETE'>(url, 'DELETE');
+    return new Request<T, 'DELETE'>(url, 'DELETE', this.logger);
   }
 }
 
