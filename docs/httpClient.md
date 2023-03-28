@@ -144,7 +144,8 @@ Expected output:
 If troubles with API for performing requests to are possible - `retry`
 method can handle such requests and automatically perform new one.
 
-By default retries to do request in 10 seconds.
+By default retries to do request in 10 seconds. Max interval time can be 60 seconds, and max amount
+of attempts - 15 times. If bigger value is passed - max value will be set.
 
 Following example will perform up to 3 additional requests, if main request has failed:
 
