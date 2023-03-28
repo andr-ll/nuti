@@ -24,7 +24,7 @@ const bigArrResult = `some pretty big array: [
   "r"
 ]`;
 
-describe('prettyOut function test', () => {
+describe('prettify function test', () => {
   it('makes console.log pretty', () => {
     expect.assertions(5);
     const obj = {
@@ -40,7 +40,7 @@ describe('prettyOut function test', () => {
     const arr = ['f', 'o', 'o'];
     const bigArr = [...arr, 'b', 'a', 'r'];
 
-    nuti.prettyOut(obj, bigObj, arr, bigArr);
+    nuti.prettify(obj, bigObj, arr, bigArr);
 
     console.log(`some pretty object: ${obj}`);
     console.log(`some pretty big object: ${bigObj}`);

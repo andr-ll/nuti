@@ -4,20 +4,21 @@
  * @license MIT
  */
 
-import { prettyOut } from './prettyOut';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore Needed to add types in the comments
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as types from './logger/types';
+import { prettify } from './prettify';
 import { timeout } from './timeout';
 import { makeLogger } from './logger';
 import { makeFlag } from './flag';
 import { rand } from './rand';
-import { req } from './httpClient';
+import { http } from './httpClient';
 
-import type * as LogTypes from './logger/types';
 import { clone } from './clone';
 import { floats } from './floats';
 
-export type Types = {
-  LoggerOptions: LogTypes.LoggerOptions;
-};
+export * from './types';
 
 export const nuti = {
   /**
@@ -38,14 +39,14 @@ export const nuti = {
   timeout,
   /**
    * A function which overrides `toString` method for Objects and Arrays.
-   * @see [docs](../docs/prettyOut.md)
+   * @see [docs](../docs/prettify.md)
    */
-  prettyOut,
+  prettify,
   /**
    * A function for creating a logger with ability to write file logs.
    * @see [docs](../docs/logger.md)
    *
-   * @param options {@link LogTypes.LoggerOptions LoggerOptions}
+   * @param options {@link types.LoggerOptions LoggerOptions}
    */
   makeLogger,
   /**
@@ -64,7 +65,7 @@ export const nuti = {
    * 'PUT', 'DELETE' requests.
    * @see [docs](../docs/httpClient.md)
    */
-  req,
+  http,
   /**
    * A function for creating deep clones of Objects or Arrays.
    * @see [decs](../docs/clone.md)

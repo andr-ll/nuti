@@ -17,8 +17,18 @@ export interface Response<T> {
   body: string;
 }
 
-export interface RequestOptions {
-  method: Method;
-  headers?: http.IncomingHttpHeaders;
-  body?: unknown;
+export interface RetryOptions {
+  /**
+   * Amount of attempts after failed request.
+   */
+  attempts: number;
+  /**
+   * Time in **seconds** to wait before perform new retry.
+   * @default 10 seconds
+   */
+  interval?: number;
+  /**
+   * Specifies if log should be written, if request has failed.
+   */
+  logOnRetry?: boolean;
 }

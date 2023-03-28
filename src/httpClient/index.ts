@@ -5,28 +5,18 @@
  * @license MIT
  */
 
-import * as http from 'http';
-import * as https from 'https';
-import { RequestOptions, Response } from './types';
-
-const protocols: Partial<Record<string, typeof http | typeof https>> = {
-  ['http:']: http,
-  ['https:']: https,
-};
+import { Logger } from '../logger';
+import { Request } from './request';
 
 export class HttpClient {
+  private logger = new Logger();
+
   /**
    * GET request.
    * @returns an object of specified interface (for TS only).
    */
-  async get<T extends object>(
-    url: string,
-    headers?: http.IncomingHttpHeaders,
-  ): Promise<Response<T>> {
-    return this.request(url, {
-      method: 'GET',
-      headers,
-    });
+  get<T extends object>(url: string) {
+    return new Request<T, 'GET'>(url, 'GET', this.logger);
   }
 
   /**
@@ -34,16 +24,8 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  async post<T extends object>(
-    url: string,
-    body: unknown,
-    headers?: http.IncomingHttpHeaders,
-  ): Promise<Response<T>> {
-    return this.request(url, {
-      method: 'POST',
-      headers,
-      body,
-    });
+  post<T extends object>(url: string) {
+    return new Request<T, 'POST'>(url, 'POST', this.logger);
   }
 
   /**
@@ -51,16 +33,8 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  async put<T extends object>(
-    url: string,
-    body: unknown,
-    headers?: http.IncomingHttpHeaders,
-  ): Promise<Response<T>> {
-    return this.request(url, {
-      method: 'PUT',
-      headers,
-      body,
-    });
+  put<T extends object>(url: string) {
+    return new Request<T, 'PUT'>(url, 'PUT', this.logger);
   }
 
   /**
@@ -68,101 +42,9 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  async delete<T extends object>(
-    url: string,
-    body: unknown,
-    headers?: http.IncomingHttpHeaders,
-  ): Promise<Response<T>> {
-    return this.request(url, {
-      method: 'DELETE',
-      headers,
-      body,
-    });
-  }
-
-  /**
-   * Main request's handler.
-   * @returns Promise which will be resolved **after** response stream is finished.
-   */
-  private async request<T>(url: string, options: RequestOptions) {
-    return new Promise<Response<T>>((resolve, reject) => {
-      const { opts, validProtocol, rawReqBody } = this.validateReqInput({
-        ...options,
-        url,
-      });
-
-      const req = validProtocol.request(opts, (res) => {
-        let rawData = '';
-        const status = res.statusCode as number;
-        const isJSON =
-          res.headers['content-type']?.includes('application/json') === true;
-
-        const contentLengthRaw = Number(res.headers['content-length']);
-        const contentLength = Number.isNaN(contentLengthRaw)
-          ? 0
-          : contentLengthRaw;
-
-        res.on('data', (chunk) => {
-          rawData += chunk.toString();
-        });
-
-        res.on('end', () => {
-          resolve({
-            status,
-            ok: status < 400,
-            contentLength,
-            headers: res.headers,
-            json: isJSON && status !== 204 ? JSON.parse(rawData) : undefined,
-            body: rawData,
-          });
-        });
-
-        res.on('error', reject);
-      });
-
-      req.on('error', reject);
-      req.write(rawReqBody);
-      req.end();
-    });
-  }
-
-  /**
-   * Function for validation request input.
-   * @param payload options for request and url
-   * @returns valid request options, raw request body and valid protocol (http(s))
-   */
-  private validateReqInput(payload: RequestOptions & { url: string }) {
-    const { headers = {}, body = {}, method, url } = payload;
-    const { protocol, hostname, port, pathname, host } = new URL(url);
-    const validProtocol = protocols[protocol];
-
-    if (validProtocol == null) {
-      throw new Error(`Unsupported protocol: ${protocol.replace(':', '')}`);
-    }
-
-    const rawReqBody = JSON.stringify(body);
-
-    if (headers['content-type'] == null) {
-      Object.assign(headers, {
-        'content-type': 'application/json',
-        'content-length': rawReqBody.length,
-      });
-    }
-
-    return {
-      opts: {
-        protocol,
-        hostname,
-        host,
-        port,
-        path: pathname,
-        headers,
-        method,
-      },
-      validProtocol,
-      rawReqBody,
-    };
+  delete<T extends object>(url: string) {
+    return new Request<T, 'DELETE'>(url, 'DELETE', this.logger);
   }
 }
 
-export const req = new HttpClient();
+export const http = new HttpClient();
