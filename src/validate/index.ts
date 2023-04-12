@@ -42,7 +42,7 @@ function validateObject({
         ? 'array'
         : 'object';
 
-    if (!value && schemaType !== 'unknown') {
+    if (value == null && schemaType !== 'unknown') {
       throw new ValidationError({
         key,
         expected,
@@ -123,6 +123,12 @@ function validateBasic({
   return item;
 }
 
+/**
+ * Assert function, which verifies data payload against provided schema.
+ * @param data any array or object
+ * @param schema ValidationSchema object which the `data` will be check against with
+ * @throws ValidationError if provided data payload is having mismatch with schema
+ */
 export function validate<S extends ValidationSchema>(
   data: unknown,
   schema: S,
@@ -136,6 +142,12 @@ export function validate<S extends ValidationSchema>(
   validator(data);
 }
 
+/**
+ * A function which creates valid `schema` for validation and `ResultType`.
+ * `ResultType` is an empty object, should be used as `typeof ResultType` only!
+ *
+ * @param schema ValidationSchema object which the `data` will be check against with
+ */
 export function buildSchema<S extends ValidationSchema>(schema: S) {
   return { schema, ResultType: {} as ValidationResult<S> };
 }

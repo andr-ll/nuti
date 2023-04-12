@@ -13,6 +13,8 @@ describe('main module test', () => {
       'http',
       'clone',
       'floats',
+      'validate',
+      'buildSchema',
     ]);
   });
 });
