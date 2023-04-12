@@ -24,7 +24,7 @@ describe('validate errors', () => {
       validate(data, { some: { name: 'string' } });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: array item has type \'string\', but \'object\' type is required (at \'some\').',
+        "Validation failed: array item has type 'string', but 'object' type is required (at 'some').",
       );
     }
   });
@@ -38,7 +38,7 @@ describe('validate errors', () => {
       validate(data, { some: ['number'] });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: array item has type \'string\', but \'array\' type is required (at \'some\').',
+        "Validation failed: array item has type 'string', but 'array' type is required (at 'some').",
       );
     }
   });
@@ -52,7 +52,7 @@ describe('validate errors', () => {
       validate(data, { name: 'string' });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: key \'name\' is missing, but \'string\' type is required.',
+        "Validation failed: key 'name' is missing, but 'string' type is required.",
       );
     }
   });
@@ -66,7 +66,7 @@ describe('validate errors', () => {
       validate(data, { name: 'string' });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: key \'name\' has type \'number\', but \'string\' type is required.',
+        "Validation failed: key 'name' has type 'number', but 'string' type is required.",
       );
     }
   });
@@ -80,7 +80,7 @@ describe('validate errors', () => {
       validate(data, { name: 'string', cars: ['string'] });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: array item has type \'undefined\', but \'string\' type is required (at \'cars\').',
+        "Validation failed: array item has type 'undefined', but 'string' type is required (at 'cars').",
       );
     }
   });
@@ -97,7 +97,7 @@ describe('validate errors', () => {
       });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: key \'year\' has type \'string\', but \'number\' type is required (at \'cars\').',
+        "Validation failed: key 'year' has type 'string', but 'number' type is required (at 'cars').",
       );
     }
   });
@@ -113,7 +113,7 @@ describe('validate errors', () => {
       validate(data, { date: 'Date' });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: could not convert key \'date\' to \'Date\'. Invalid value of type \'string\' is used.',
+        "Validation failed: could not convert key 'date' to 'Date'. Invalid value of type 'string' is used.",
       );
     }
   });

@@ -95,7 +95,7 @@ describe('error handling', () => {
       await nuti.http.get('http://localhost:3001').validate({ name: 'string' });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'Validation failed: key \'name\' is missing, but \'string\' type is required.',
+        "Validation failed: key 'name' is missing, but 'string' type is required.",
       );
     }
 

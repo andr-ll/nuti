@@ -19,6 +19,7 @@ overrides:
           'jest/valid-expect': 'error',
           'jest/prefer-expect-assertions': 'error',
           '@typescript-eslint/no-empty-function': 'off',
+          'quotes': 'off',
         },
     },
   ]
