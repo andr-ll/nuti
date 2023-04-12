@@ -180,7 +180,35 @@ const response = await nuti.http
   .pipe(stream);
 ```
 
-### TS GENERIC TYPES
+### VALIDATE RESPONSE DATA
+
+> **Note**
+>
+> `.validate()` method is designed to assert data is matches provided schema.
+> In case of wrong type - error will be thrown.
+
+```ts
+const { json } = await nuti.http
+  .get('http://localhost:3000/user')
+  .validate({
+    name: 'string';
+    id: 'number';
+  });
+
+const { name, id } = json;
+
+console.log(`The "name" field has type "${typeof name}" and value "${name}"`);
+console.log(`The "id" field has type "${typeof id}" and value "${id}"`);
+```
+
+Expected output:
+
+```log
+The "name" field has type "string" and value "some user"
+The "id" field has type "number" and value "123"
+```
+
+### TS GENERIC TYPES - DEPRECATED! Use `.validate()` method instead
 
 > **Note**
 >

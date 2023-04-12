@@ -17,6 +17,7 @@ import { http } from './httpClient';
 
 import { clone } from './clone';
 import { floats } from './floats';
+import { buildSchema, validate } from './validate';
 
 export * from './types';
 
@@ -76,6 +77,17 @@ export const nuti = {
    * @see [docs](../docs/floats.md)
    */
   floats,
+
+  /**
+   * Assert function, which verifies data payload against provided schema.
+   * @see [docs](../docs/validate.md)
+   */
+  validate,
+  /**
+   * A function which creates valid `schema` for validation and `ResultType`.
+   * `ResultType` is an empty object, should be used as `typeof ResultType` only!
+   */
+  buildSchema,
 };
 
 export default nuti;

@@ -8,6 +8,7 @@ interface CreateServerOptions {
   contentType?: string;
   body?: unknown;
   fails?: number;
+  port?: number;
 }
 
 const createServer = (options: CreateServerOptions = {}) => {
@@ -16,6 +17,7 @@ const createServer = (options: CreateServerOptions = {}) => {
     contentType = 'application/json',
     body = { data: 'some data' },
     fails = 0,
+    port = 3000,
   } = options;
   let failRequest = fails;
   const server = http.createServer((_, res) => {
@@ -35,7 +37,7 @@ const createServer = (options: CreateServerOptions = {}) => {
     body == null ? res.end() : res.end(jsonBody);
   });
 
-  server.listen(3000);
+  server.listen(port);
 
   return server;
 };
@@ -84,6 +86,21 @@ describe('error handling', () => {
       );
     }
   });
+
+  it('throws and error if request validation fails', async () => {
+    expect.assertions(1);
+    const server = createServer({ port: 3001 });
+
+    try {
+      await nuti.http.get('http://localhost:3001').validate({ name: 'string' });
+    } catch (error) {
+      expect(error.message).toStrictEqual(
+        "Validation failed: key 'name' is missing, but 'string' type is required.",
+      );
+    }
+
+    server.close();
+  });
 });
 
 describe('http module test', () => {
@@ -92,11 +109,12 @@ describe('http module test', () => {
 
     const server = createServer();
 
-    const response = await nuti.http.get<{ data: string }>(
-      'http://localhost:3000',
-    );
+    const response = await nuti.http
+      .get('http://localhost:3000')
+      .validate({ data: 'string' });
+
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.data).toStrictEqual('some data');
+    expect(response.json.data).toStrictEqual('some data');
 
     server.close();
   });
@@ -107,11 +125,12 @@ describe('http module test', () => {
     const server = createServer();
 
     const response = await nuti.http
-      .get<{ data: string }>('http://localhost:3000')
-      .headers({ 'accept-language': 'ENG' });
+      .get('http://localhost:3000')
+      .headers({ 'accept-language': 'ENG' })
+      .validate({ data: 'string' });
 
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.data).toStrictEqual('some data');
+    expect(response.json.data).toStrictEqual('some data');
 
     server.close();
   });
@@ -125,11 +144,12 @@ describe('http module test', () => {
     });
 
     const response = await nuti.http
-      .post<{ created: string }>('http://localhost:3000')
-      .body({ data: 'some-data' });
+      .post('http://localhost:3000')
+      .body({ data: 'some-data' })
+      .validate({ created: 'string' });
 
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.created).toStrictEqual('success');
+    expect(response.json.created).toStrictEqual('success');
 
     server.close();
   });
@@ -143,11 +163,12 @@ describe('http module test', () => {
     });
 
     const response = await nuti.http
-      .put<{ updated: string }>('http://localhost:3000')
-      .body({ data: 'some-data' });
+      .put('http://localhost:3000')
+      .body({ data: 'some-data' })
+      .validate({ updated: 'string' });
 
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.updated).toStrictEqual('success');
+    expect(response.json.updated).toStrictEqual('success');
 
     server.close();
   });
@@ -177,11 +198,12 @@ describe('http module test', () => {
     const server = createServer();
 
     const response = await nuti.http
-      .get<{ data: string }>('http://localhost:3000')
+      .get('http://localhost:3000')
+      .validate({ data: 'string' })
       .finally(() => expect(1).toStrictEqual(1));
 
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.data).toStrictEqual('some data');
+    expect(response.json.data).toStrictEqual('some data');
 
     server.close();
   });
@@ -194,10 +216,12 @@ describe('http module test', () => {
     const server = createServer({ fails: 2 });
 
     const response = await nuti.http
-      .get<{ data: string }>('http://localhost:3000')
-      .retry({ attempts: 3, interval: 1, logOnRetry: true });
+      .get('http://localhost:3000')
+      .retry({ attempts: 3, interval: 1, logOnRetry: true })
+      .validate({ data: 'string' });
+
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.data).toStrictEqual('some data');
+    expect(response.json.data).toStrictEqual('some data');
 
     server.close();
   });
@@ -215,12 +239,13 @@ describe('http module test', () => {
     const server = createServer();
 
     const response = await nuti.http
-      .get<{ data: string }>('http://localhost:3000')
+      .get('http://localhost:3000')
       .pipe(stream)
-      .retry({ attempts: 3, interval: 1, logOnRetry: true });
+      .retry({ attempts: 3, interval: 1, logOnRetry: true })
+      .validate({ data: 'string' });
 
     expect(response.json).not.toBeUndefined();
-    expect(response.json?.data).toStrictEqual('some data');
+    expect(response.json.data).toStrictEqual('some data');
 
     server.close();
   });

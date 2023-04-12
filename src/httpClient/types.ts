@@ -8,12 +8,12 @@ import * as http from 'http';
 
 export type Method = 'POST' | 'PUT' | 'GET' | 'DELETE';
 
-export interface Response<T> {
+export interface Response<T, B extends boolean> {
   status: number;
   contentLength: number;
   ok: boolean;
   headers: http.IncomingHttpHeaders;
-  json?: T;
+  json: B extends true ? T : T | undefined;
   body: string;
 }
 

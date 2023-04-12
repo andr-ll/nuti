@@ -15,25 +15,31 @@ import * as https from 'https';
 import { Logger } from '../logger';
 import { timeout } from '../timeout';
 import { Method, Response, RetryOptions } from './types';
+import { ValidationResult, ValidationSchema } from '../validate/types';
+import { validate } from '../validate';
 
 const protocols: Partial<Record<string, typeof http | typeof https>> = {
   ['http:']: http,
   ['https:']: https,
 };
 
-export class Request<T, M extends Method = Method> extends Promise<
-  Response<T>
-> {
+export class Request<
+  M extends Method = Method,
+  B extends boolean = false,
+  S extends ValidationSchema = ValidationSchema,
+  T = B extends true ? ValidationResult<S> : unknown,
+> extends Promise<Response<T, B>> {
   private _headers: http.IncomingHttpHeaders = {};
   private _body: unknown;
   private _retryAttempts = 0;
   private _retryInterval = 10;
   private _pipeStream: NodeJS.WritableStream | NodeJS.ReadWriteStream;
   private _logOnRetry = false;
+  private _schema: S;
 
   constructor(
     private readonly url: string,
-    private readonly method: Method,
+    private readonly method: M,
     private readonly logger: Logger,
   ) {
     super(() => {
@@ -54,7 +60,7 @@ export class Request<T, M extends Method = Method> extends Promise<
    * @param body valid value to be sent through http(s)
    * @returns a {@link Request Request} entity or {@link types.Response Response} if await/then used.
    */
-  public body: M extends 'GET' ? never : (body: unknown) => Request<T, M>;
+  public body: M extends 'GET' ? never : (body: unknown) => Request<M>;
 
   /**
    * Adds retry logic to the request.
@@ -110,6 +116,11 @@ export class Request<T, M extends Method = Method> extends Promise<
     return this;
   }
 
+  validate<Schema extends S>(schema: Schema) {
+    this._schema = schema;
+    return this as unknown as Request<M, true, Schema>;
+  }
+
   /*!
    * Private methods
    */
@@ -120,7 +131,7 @@ export class Request<T, M extends Method = Method> extends Promise<
    * @returns a {@link types.Response Response} promise
    * @throws an error if request has failed (after all retries if they were added)
    */
-  private async manageRequest(): Promise<Response<T>> {
+  private async manageRequest(): Promise<Response<T, B>> {
     if (this._pipeStream) {
       this._retryAttempts = 0;
     }
@@ -152,7 +163,7 @@ export class Request<T, M extends Method = Method> extends Promise<
    * @returns Response promise
    */
   private async doRequest() {
-    return new Promise<Response<T>>((resolve, reject) => {
+    return new Promise<Response<T, B>>((resolve, reject) => {
       const { opts, validProtocol, rawReqBody } = this.validateRequestInput();
 
       const req = validProtocol.request(opts, (res) => {
@@ -175,12 +186,24 @@ export class Request<T, M extends Method = Method> extends Promise<
         });
 
         res.on('end', () => {
+          const json =
+            isJSON && status !== 204 ? JSON.parse(rawData) : undefined;
+
+          if (this._schema) {
+            try {
+              this._retryAttempts = 0;
+              validate(json, this._schema);
+            } catch (error) {
+              reject(error);
+            }
+          }
+
           resolve({
             status,
             ok: status < 400,
             contentLength,
             headers: res.headers,
-            json: isJSON && status !== 204 ? JSON.parse(rawData) : undefined,
+            json,
             body: rawData,
           });
         });
@@ -248,9 +271,9 @@ export class Request<T, M extends Method = Method> extends Promise<
    * Override promise default methods then, catch and finally
    */
 
-  then<TResult1 = Response<T>, TResult2 = never>(
+  then<TResult1 = Response<T, B>, TResult2 = never>(
     onfulfilled?:
-      | ((value: Response<T>) => TResult1 | PromiseLike<TResult1>)
+      | ((value: Response<T, B>) => TResult1 | PromiseLike<TResult1>)
       | null
       | undefined,
     onrejected?:
@@ -266,11 +289,13 @@ export class Request<T, M extends Method = Method> extends Promise<
       | ((reason: any) => TResult | PromiseLike<TResult>)
       | null
       | undefined,
-  ): Promise<Response<T> | TResult> {
+  ): Promise<Response<T, B> | TResult> {
     return this.manageRequest().catch(onrejected);
   }
 
-  finally(onfinally?: (() => void) | null | undefined): Promise<Response<T>> {
+  finally(
+    onfinally?: (() => void) | null | undefined,
+  ): Promise<Response<T, B>> {
     return this.manageRequest().finally(onfinally);
   }
 }

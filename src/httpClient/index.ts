@@ -15,8 +15,8 @@ export class HttpClient {
    * GET request.
    * @returns an object of specified interface (for TS only).
    */
-  get<T extends object>(url: string) {
-    return new Request<T, 'GET'>(url, 'GET', this.logger);
+  get(url: string) {
+    return new Request(url, 'GET', this.logger);
   }
 
   /**
@@ -24,8 +24,8 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  post<T extends object>(url: string) {
-    return new Request<T, 'POST'>(url, 'POST', this.logger);
+  post(url: string) {
+    return new Request(url, 'POST', this.logger);
   }
 
   /**
@@ -33,8 +33,8 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  put<T extends object>(url: string) {
-    return new Request<T, 'PUT'>(url, 'PUT', this.logger);
+  put(url: string) {
+    return new Request(url, 'PUT', this.logger);
   }
 
   /**
@@ -42,8 +42,8 @@ export class HttpClient {
    * @param body Any object.
    * @returns an object of specified interface (for TS only).
    */
-  delete<T extends object>(url: string) {
-    return new Request<T, 'DELETE'>(url, 'DELETE', this.logger);
+  delete(url: string) {
+    return new Request(url, 'DELETE', this.logger);
   }
 }
 
