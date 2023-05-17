@@ -8,7 +8,11 @@ export class ValidationError extends Error {
     parentKeys,
     convertFailed,
   }: ValidationErrorPayload) {
-    const item = key ? `key '${key}'` : 'array item';
+    const item = key
+      ? key === 'single value'
+        ? 'value'
+        : `key '${key}'`
+      : 'array item';
 
     const receivedMessage =
       received === 'missing' ? 'is missing' : `has type '${received}'`;

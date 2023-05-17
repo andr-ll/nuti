@@ -1,8 +1,50 @@
-import { BasicTypes } from './literals';
+export type PrimitiveTypes =
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'unknown'
+  | 'null'
+  | 'Date';
+
+export type ObjectType = 'object';
+export type ArrayType = 'array';
+export type LiteralType = 'literal';
 
 type KeyType = string | number | symbol;
-type Types = BasicTypes | ArrayType | ObjectType;
 
-export type ArrayType = [type: BasicTypes | ArrayType | ObjectType];
-export type ObjectType = { [key: KeyType]: Types };
-export type ValidationSchema = ObjectType | ArrayType;
+export type Optional = true | undefined;
+
+export type PrimitivesSchemaType = {
+  type: PrimitiveTypes;
+  optional: Optional;
+};
+
+export type Literals = string[];
+
+export type LiteralSchemaType = {
+  type: LiteralType;
+  optional: Optional;
+  literals: Literals;
+};
+
+export type ObjectSchemaType = {
+  type: ObjectType;
+  optional: Optional;
+  schema: ValidationSchema;
+};
+
+export type ArraySchemaType = {
+  type: ArrayType;
+  optional: Optional;
+  values: Values;
+};
+
+export type Values =
+  | PrimitivesSchemaType
+  | ObjectSchemaType
+  | ArraySchemaType
+  | LiteralSchemaType;
+
+export type ValidationSchema = {
+  [key: KeyType]: Values;
+};

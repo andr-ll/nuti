@@ -1,7 +1,15 @@
-import { BasicTypes } from './literals';
-import { ArrayType, ObjectType, ValidationSchema } from './schema';
+import {
+  ArraySchemaType,
+  LiteralSchemaType,
+  ObjectSchemaType,
+  PrimitivesSchemaType,
+  ValidationSchema,
+  Values,
+} from './schema';
 
-type ArrayElement<A> = A extends (infer ElementType)[] ? ElementType : never;
+type isOptional<T, O extends true | undefined> = O extends true
+  ? T | undefined
+  : T;
 
 type LiteralToTypes = {
   string: string;
@@ -9,41 +17,39 @@ type LiteralToTypes = {
   boolean: boolean;
   Date: Date;
   unknown: unknown;
+  null: null;
 };
 
-type ArrayTypeValidation<
-  T extends ArrayType,
-  E = ArrayElement<T>,
-> = E extends BasicTypes
-  ? Array<LiteralToTypes[E]>
-  : E extends ArrayType
-  ? ArrayTypeValidation<E>
-  : E extends ObjectType
-  ? Array<ValidationResult<E>>
+type ArrayTypeValidation<V extends Values> = V extends PrimitivesSchemaType
+  ? Array<isOptional<LiteralToTypes[V['type']], V['optional']>>
+  : V extends ObjectSchemaType
+  ? Array<isOptional<ValidationResult<V['schema']>, V['optional']>>
+  : V extends ArraySchemaType
+  ? Array<isOptional<ArrayTypeValidation<V['values']>, V['optional']>>
   : never;
 
-export type ValidationResult<Schema extends ValidationSchema> = {
-  [K in keyof Schema]: Schema[K] extends BasicTypes
-    ? LiteralToTypes[Schema[K]]
-    : Schema[K] extends ArrayType
-    ? ArrayTypeValidation<Schema[K]>
-    : Schema[K] extends ObjectType
-    ? ValidationResult<Schema[K]>
+type Validate<V extends Values> = V extends PrimitivesSchemaType
+  ? isOptional<LiteralToTypes[V['type']], V['optional']>
+  : V extends ObjectSchemaType
+  ? isOptional<ValidationResult<V['schema']>, V['optional']>
+  : V extends ArraySchemaType
+  ? isOptional<ArrayTypeValidation<V['values']>, V['optional']>
+  : V extends LiteralSchemaType
+  ? isOptional<V['literals'][number], V['optional']>
+  : never;
+
+export type ValidationResult<Schema extends ValidationSchema | Values> =
+  Schema extends ValidationSchema
+    ? {
+        [K in keyof Schema]: Validate<Schema[K]>;
+      }
+    : Schema extends Values
+    ? Validate<Schema>
     : never;
-};
 
-type ValueKey<T> = T extends BasicTypes
-  ? 'item'
-  : T extends ArrayType
-  ? 'arr'
-  : T extends ObjectType
-  ? 'obj'
-  : 'value';
-
-export type ValidatorOptions<T = BasicTypes | ObjectType | ArrayType> = {
-  [K in ValueKey<T>]?: unknown;
-} & {
-  schema: T;
-  key?: T extends BasicTypes ? string : never;
+export type ValidatorOptions<S extends ValidationSchema | Values> = {
+  schema: S;
+  key?: string;
   parentKeys?: string[];
+  value: unknown;
 };
