@@ -1,6 +1,6 @@
 {
   "name": "nuti",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "Andrii Lytovchenko <andr.lyt.dev@gmail.com>",
   "license": "MIT",
   "description": "A collection of commonly used utils for Node.js.",
@@ -47,8 +47,8 @@
   "devDependencies": {
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.2",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "cspell": "^6.31.2",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
