@@ -18,6 +18,7 @@ import { http } from './httpClient';
 import { clone } from './clone';
 import { floats } from './floats';
 import { buildSchema, validate } from './validate';
+import { genJSON } from './genJSON';
 
 export * from './types';
 
@@ -88,6 +89,10 @@ export const nuti = {
    * `ResultType` is an empty object, should be used as `typeof ResultType` only!
    */
   buildSchema,
+  /**
+   * A function for creating json files with mocked data.
+   */
+  genJSON,
 };
 
 export default nuti;
