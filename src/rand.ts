@@ -86,6 +86,19 @@ export class Rand {
 
     return buf.toString(enc).slice(0, lenOrEnc);
   }
+
+  /**
+   * Generates a random date object with possible value from 'now' minus 'range' days.
+   *
+   * @param range amount of days in which random date can be created (counting from 'now' to past).
+   * Equals to 14 by default
+   *
+   */
+  public date(range = 14) {
+    const days = this.numb(0, range);
+    const daysInMS = days * 24 * 60 * 60 * 1000;
+    return new Date(Date.now() - daysInMS);
+  }
 }
 
 export const rand = new Rand();

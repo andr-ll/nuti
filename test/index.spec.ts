@@ -15,6 +15,7 @@ describe('main module test', () => {
       'floats',
       'validate',
       'buildSchema',
+      'genJSON',
     ]);
   });
 });

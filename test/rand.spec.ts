@@ -43,4 +43,18 @@ describe('rand module test', () => {
     expect(bool === true || bool === false).toBeTruthy();
     expect(typeof bool).toStrictEqual('boolean');
   });
+
+  it('checks if rand creates valid date', () => {
+    expect.assertions(2);
+    const highestDateBarrier = Date.now();
+    const lowestDateBarrier = highestDateBarrier - 14 * 24 * 60 * 60 * 1000;
+
+    const date = nuti.rand.date();
+    const timeInMS = Number(date);
+
+    expect(
+      lowestDateBarrier <= timeInMS && timeInMS >= lowestDateBarrier,
+    ).toBeTruthy();
+    expect(date).toBeInstanceOf(Date);
+  });
 });

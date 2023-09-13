@@ -1,6 +1,6 @@
 {
   "name": "nuti",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "author": "Andrii Lytovchenko <andr.lyt.dev@gmail.com>",
   "license": "MIT",
   "description": "A collection of commonly used utils for Node.js.",
@@ -59,6 +59,7 @@
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.7.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vator": "^1.1.1"
   }
 }

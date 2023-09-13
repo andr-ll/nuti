@@ -47,3 +47,15 @@ const numb_1 = rand.numb();
 // returns a random number between 12 and 903
 const numb_2 = rand.numb(12, 903);
 ```
+
+### date:
+
+```ts
+const { rand } = nuti;
+
+// returns a random date from 2 weeks ago until now (by default)
+const date_1 = rand.date();
+
+// returns a random date from 5 days ago until now
+const date_2 = rand.date(5);
+```
