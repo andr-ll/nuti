@@ -27,6 +27,7 @@ describe('genJSON helper test', () => {
         name: () => nuti.rand.str(),
         age: () => nuti.rand.numb(0, 100),
         createdAt: () => nuti.rand.date(),
+        isOnline: false,
       },
     });
 
@@ -40,7 +41,12 @@ describe('genJSON helper test', () => {
 
     const obj = JSON.parse(fs.readFileSync(pathObj, { encoding: 'utf-8' }));
     const validObj = () =>
-      validate(obj, { name: v.string, age: v.number, createdAt: v.Date });
+      validate(obj, {
+        name: v.string,
+        age: v.number,
+        createdAt: v.Date,
+        isOnline: v.boolean,
+      });
 
     expect(validObj).not.toThrow();
   });
