@@ -4,6 +4,7 @@
 [![Build][build-img]][build-url]
 [![Coverage][coverage-img]][coverage-url]
 [![License][license-pic]][license-url]
+[![Downloads][npm-downloads]][npm-url]
 
 A collection of commonly used utils for Node.js.
 
@@ -37,6 +38,7 @@ const { nuti } = require('nuti');
 
 [npm-img]: https://img.shields.io/npm/v/nuti.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/nuti
+[npm-downloads]: https://img.shields.io/npm/dt/nuti?logo=Hack%20The%20Box&logoColor=green&label=downloads
 [build-img]: https://img.shields.io/github/actions/workflow/status/andr-ii/nuti/build.yml?logo=github
 [build-url]: https://github.com/andr-ii/nuti/actions/workflows/build.yml
 [coverage-img]: https://img.shields.io/coverallsCoverage/github/andr-ii/nuti?label=coverage&logo=jest
