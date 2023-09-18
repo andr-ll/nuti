@@ -24,17 +24,14 @@ import nuti from 'nuti';
 const { nuti } = require('nuti');
 ```
 
-## Available utilities
+## Docs for available utilities
 
 1. [logger](./docs/logger.md)
 2. [timeout](./docs/timeout.md)
-3. [flag](./docs/flag.md)
-4. [prettify](./docs/prettify.md)
-5. [rand](./docs/rand.md)
-6. [http](./docs/httpClient.md)
-7. [clone](./docs/clone.md)
-8. [floats](./docs/floats.md)
-9. [validate / buildSchema](./docs/validate.md)
+3. [rand](./docs/rand.md)
+4. [clone](./docs/clone.md)
+5. [floats](./docs/floats.md)
+6. [genJSON](./docs/genJSON.md)
 
 [npm-img]: https://img.shields.io/npm/v/nuti.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/nuti

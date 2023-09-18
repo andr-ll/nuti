@@ -6,15 +6,10 @@ describe('main module test', () => {
 
     expect(Object.keys(nuti)).toStrictEqual([
       'timeout',
-      'prettify',
       'makeLogger',
-      'makeFlag',
       'rand',
-      'http',
       'clone',
       'floats',
-      'validate',
-      'buildSchema',
       'genJSON',
     ]);
   });
