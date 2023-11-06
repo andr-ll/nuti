@@ -22,4 +22,5 @@ export interface Context {
 export interface LoggerOptions {
   stdoutEnable?: boolean;
   filePath?: string;
+  flags?: string;
 }

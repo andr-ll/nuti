@@ -14,7 +14,7 @@ export class Logger {
   private writers: Writer[] = [];
 
   constructor(options: LoggerOptions = {}) {
-    const { filePath, stdoutEnable = true } = options;
+    const { filePath, stdoutEnable = true, flags } = options;
 
     if (stdoutEnable === false && filePath == null) {
       throw new Error('At least one output has to be specified!');
@@ -25,7 +25,7 @@ export class Logger {
     }
 
     if (typeof filePath === 'string') {
-      const stream = fs.createWriteStream(filePath);
+      const stream = fs.createWriteStream(filePath, { flags });
       this.createWriter(stream.write.bind(stream), true);
     }
   }
