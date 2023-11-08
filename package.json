@@ -1,14 +1,13 @@
 {
   "name": "nuti",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Andrii Lytovchenko <andr.lyt.dev@gmail.com>",
   "license": "MIT",
   "description": "A collection of commonly used utils for Node.js.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "engines": {
-    "node": ">=16",
-    "npm": ">=8"
+    "node": ">=16"
   },
   "repository": {
     "type": "git",
