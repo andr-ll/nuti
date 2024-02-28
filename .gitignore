@@ -3,6 +3,7 @@
 /build
 /lib
 /t.ts
+package-lock.json
 
 # Logs
 *.log
